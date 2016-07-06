@@ -1,0 +1,19 @@
+---
+infoblox:
+  hostname: "10.0.0.10"
+  username: "gbolo"
+  password: "changeme"
+  version: "1.6"
+  dns_view: "default"
+  network_view: "default"
+
+records:
+  host:
+    ansible.linuxctl.com: "10.1.1.10"
+    elasticsearch1.aws.linuxctl.com: "1.1.1.1"
+    elasticsearch2.do.linuxctl.com: "2.2.2.1"
+    logstash1.aws.linuxctl.com: "1.1.1.2"
+    logstash2.do.linuxctl.com: "2.2.2.2"
+    kibana.linuxctl.com: "10.1.1.21"
+  cname:
+    kibana.linuxctl.com: dashboard.linuxctl.com
