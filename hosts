@@ -1,0 +1,26 @@
+# Example of hosts file
+
+[all]
+ansible.linuxctl.com
+elasticsearch1.aws.linuxctl.com
+elasticsearch2.do.linuxctl.com
+logstash1.aws.linuxctl.com
+logstash2.do.linuxctl.com
+kibana.linuxctl.com
+
+[control]
+ansible.linuxctl.com
+
+[docker]
+ansible.linuxctl.com
+
+[elasticsearch]
+elasticsearch1.aws.linuxctl.com
+elasticsearch2.do.linuxctl.com
+
+[logstash]
+logstash1.aws.linuxctl.com
+logstash2.do.linuxctl.com
+
+[kibana]
+kibana.linuxctl.com

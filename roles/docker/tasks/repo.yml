@@ -1,0 +1,9 @@
+---
+  
+- name: Install Official Docker Repo
+  yum_repository:
+    name: docker
+    description: Docker Repository
+    baseurl: https://yum.dockerproject.org/repo/main/centos/$releasever/
+    gpgkey: https://yum.dockerproject.org/gpg
+    gpgcheck: yes

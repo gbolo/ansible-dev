@@ -1,0 +1,10 @@
+---
+docker_pkg_state: present
+docker_debug: false
+enable_docker_compose: true
+docker_api_cors_headers: "*"
+
+# these are variables dropins
+dropins:
+  http-api.conf: # var for config name
+    bind_ip: "{{ ansible_default_ipv4.address }}" # var for bind ip

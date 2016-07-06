@@ -1,0 +1,38 @@
+---
+
+# Configure Docker Deamon Drop-ins
+
+# Create dropin directoy
+- name: create dropin directory
+  file: path=/etc/systemd/system/docker.service.d state=directory mode=0755
+
+# get list of files in docker.d register variable called active
+- name: get list of drop-ins
+  shell: ls -1 /etc/systemd/system/docker.service.d/
+  register: active_dropins
+  # disable change, since it alwyas produces a change
+  changed_when: False
+
+# remove all files in docker.d which are not managed by us
+- name: remove other drop-ins
+  file: path=/etc/systemd/system/docker.service.d/{{ item }} state=absent
+  with_items: "{{ active_dropins.stdout_lines }}"
+  when: item not in dropins
+  notify:
+    - reload systemd docker
+
+# add our managed dropins to docker.d
+- name: configure http api
+  template: src=docker_http-api.j2 dest=/etc/systemd/system/docker.service.d/{{ item.key }} mode=0755
+  with_dict: "{{ dropins }}"
+  notify:
+    - reload systemd docker
+
+# Create docker config directoy
+- name: create docker config directory
+  file: path=/etc/docker state=directory mode=0600
+
+# configure docker deamon json file
+- name: configure docker.json
+  template: src=docker.json.j2 dest=/etc/docker/docker.json mode=0755
+  notify: restart docker
