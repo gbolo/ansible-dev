@@ -1,2 +1,7 @@
-### infoblox creds ###
+## infoblox creds
 python/infoblox_config.yml
+
+## hostnames for ansible
+hosts
+
+## group vars
