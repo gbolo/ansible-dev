@@ -5,3 +5,12 @@ python/infoblox_config.yml
 hosts
 
 ## group vars
+group_vars/*
+
+## terraform vars
+terraform/*.tfvars
+terraform/*-vars.tf
+
+## terraform state
+terraform/*.tfstate
+terraform/*.tfstate.backup
