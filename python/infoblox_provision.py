@@ -21,7 +21,6 @@ iba_api = infoblox.Infoblox(creds["infoblox"]["hostname"],
                             creds["infoblox"]["dns_view"],
                             creds["infoblox"]["network_view"])
 
-
 # Create HOST records (A/PTR)
 print ('CREATING HOST RECORDS')
 for hostname in creds["records"]["host"]:
@@ -37,5 +36,15 @@ for cname in creds["records"]["cname"]:
     try:
         ip = iba_api.create_cname_record(cname, creds["records"]["cname"][cname])
         print(cname + " -> " + creds["records"]["cname"][cname])
+    except Exception as e:
+        print(e)
+
+# Check ips
+print ('CHECKING IPS')
+for ip in creds["records"]["ip"]:
+    try:
+        names = iba_api.get_host_by_ip(ip)
+        for name in names:
+            print(ip + " found: " + name)
     except Exception as e:
         print(e)
