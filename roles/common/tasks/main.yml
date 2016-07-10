@@ -1,2 +1,10 @@
 ---
-# tasks file for common
+# Install common packages
+- name: Install Common Packages
+  yum: name={{item}} state={{docker_pkg_state}} disable_gpg_check=no
+  with_items:
+    - vim
+    - tree
+    - net-tools
+    - tcpdump
+    - nmap
