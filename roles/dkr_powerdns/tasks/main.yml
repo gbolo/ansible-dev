@@ -15,7 +15,7 @@
     state: started
     restart_policy: always
     volumes:
-     - "-v /opt/dkr-powerdns/pdns.conf:/usr/local/etc/pdns.conf:ro"
+     - "/opt/dkr-powerdns/pdns.conf:/usr/local/etc/pdns.conf:ro"
     ports:
      - "53:53"
      - "53:53/udp"
