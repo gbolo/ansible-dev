@@ -1,4 +1,13 @@
 ---
+# EPEL Repo
+- name: Install EPEL YUM Repo
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgkey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+    gpgcheck: yes
+
 # Install common packages
 - name: Install Common Packages
   yum: name={{item}} state={{docker_pkg_state}} disable_gpg_check=no
