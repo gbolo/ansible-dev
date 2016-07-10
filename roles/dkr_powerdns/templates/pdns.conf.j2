@@ -1,0 +1,17 @@
+### Backend config
+launch=gmysql
+gmysql-host={{pdns_mysql_host}}
+gmysql-dbname={{pdns_mysql_dbname}}
+gmysql-user={{pdns_mysql_user}}
+gmysql-password={{pdns_mysql_pass}}
+gmysql-port={{pdns_mysql_port}}
+
+### REST API (3.x)
+experimental-json-interface={{pdns_api_enable}}
+experimental-api-key={{pdns_api_key}}
+webserver={{pdns_api_enable}}
+webserver-address={{pdns_api_bind}}
+
+### OTHER
+default-soa-name={{pdns_soa_name}}
+default-soa-mail={{pdns_soa_mail}}

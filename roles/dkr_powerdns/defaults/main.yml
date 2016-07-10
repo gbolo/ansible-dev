@@ -1,0 +1,17 @@
+---
+
+### BACKEND
+pdns_mysql_host: 10.0.0.1
+pdns_mysql_dbname: powerdns
+pdns_mysql_user: powerdns
+pdns_mysql_pass: powerdns
+pdns_mysql_port: 3306
+
+### REST API (3.x)
+pdns_api_enable: yes
+pdns_api_key: changeme
+pdns_api_bind: 0.0.0.0
+
+### OTHER
+pdns_soa_name: ns.example.com
+pdns_soa_mail: root.example.com
