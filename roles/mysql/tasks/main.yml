@@ -1,0 +1,27 @@
+---
+
+- name: Install EPEL YUM Repo
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgkey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+    gpgcheck: yes
+
+- name: Install Tools
+  yum: name={{item}} state=present disable_gpg_check=no
+  with_items:
+    - MySQL-python
+
+- name: Install MYSQL
+  yum: name=mariadb-server state=present disable_gpg_check=no
+
+- name: Ensure MYSQL Runing and Enabled
+  service: name=mariadb state=started enabled=yes
+
+- name: create demo database
+  mysql_db: name={{ db_name }} state=present
+
+- name: create database user
+  mysql_user: name={{ db_user_name }} password={{ db_user_pass }} priv={{ db_name }}.*:ALL
+              host='{{ db_user_host }}' state=present
