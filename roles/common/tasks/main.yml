@@ -22,3 +22,8 @@
 - name: Installing VMware Tools
   yum: name=open-vm-tools state=present disable_gpg_check=no
   when: ansible_virtualization_type == "VMware"
+
+# Ensure VMware Tools is Running and Enabled
+- name: Ensure VMware Tools is Running and Enabled
+  service: name=vmtoolsd state=started enabled=yes
+  when: ansible_virtualization_type == "VMware"
