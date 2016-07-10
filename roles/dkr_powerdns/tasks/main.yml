@@ -1,5 +1,10 @@
 ---
 
+- name: Install Required Packages
+  yum: name={{item}} state={{docker_pkg_state}} disable_gpg_check=no
+  with_items:
+    - python-docker-py
+
 - name: create docker volume mount
   file: path=/opt/dkr-powerdns state=directory mode=0755
 
@@ -8,7 +13,7 @@
     name: powerdns
     image: gbolo/powerdns
     state: started
-    restart_policy: unless-stopped
+    restart_policy: always
     volumes:
      - "-v /opt/dkr-powerdns/pdns.conf:/usr/local/etc/pdns.conf:ro"
     ports:
