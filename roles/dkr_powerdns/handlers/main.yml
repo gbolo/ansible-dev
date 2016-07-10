@@ -1,20 +1,8 @@
 ---
 
-- name: create docker volume mount
-  file: path=/opt/dkr-powerdns state=directory mode=0755
-
-- name: add pdns.conf
-  template: src=docker.json.j2 dest=/etc/docker/docker.json mode=0755
-  notify: restart docker
-
-- name: create pdns container
+- name: restart dkr-pdns
   docker_container:
     name: powerdns
     image: gbolo/powerdns
     state: started
-    volume:
-     - "-v /opt/dkr-powerdns/pdns.conf:/usr/local/etc/pdns.conf:ro"
-    ports:
-     - "53:53"
-     - "53:53/udp"
-     - "8081:8081"
+    restart: yes
