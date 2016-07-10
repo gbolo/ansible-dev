@@ -3,6 +3,7 @@ docker_pkg_state: present
 docker_debug: false
 enable_docker_compose: true
 docker_api_cors_headers: "*"
+docker_graph: "/var/lib/docker"
 
 # these are variables dropins
 dropins:
