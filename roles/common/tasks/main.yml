@@ -10,8 +10,9 @@
 
 # Install common packages
 - name: Install Common Packages
-  yum: name={{item}} state={{docker_pkg_state}} disable_gpg_check=no
+  yum: name={{item}} state=present disable_gpg_check=no
   with_items:
+    - libselinux-python
     - vim
     - tree
     - net-tools
@@ -29,7 +30,8 @@
   when: ansible_virtualization_type == "VMware"
 
 # SSH keys
-- authorized_key:
-  user: root
-  key: "{{ lookup('file', '/root/sshkeys/common.pub') }}"
-  manage_dir: yes
+- name: Installing Common SSH Key
+  authorized_key:
+    user: root
+    key: "{{ lookup('file', '/root/sshkeys/common.pub') }}"
+    manage_dir: yes
