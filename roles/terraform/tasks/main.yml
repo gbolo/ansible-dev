@@ -1,0 +1,4 @@
+---
+
+- name: Get Terraform release
+  get_url: url={{terraform_url}} dest=/tmp/terraform.tgz mode=0755 checksum={{terraform_checksum}}
