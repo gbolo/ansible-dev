@@ -27,3 +27,9 @@
 - name: Ensure VMware Tools is Running and Enabled
   service: name=vmtoolsd state=started enabled=yes
   when: ansible_virtualization_type == "VMware"
+
+# SSH keys
+- authorized_key:
+  user: root
+  key: "{{ lookup('file', '/root/sshkeys/common.pub') }}"
+  manage_dir: yes
