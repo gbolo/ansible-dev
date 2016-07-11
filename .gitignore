@@ -1,6 +1,9 @@
 ## infoblox creds
 python/infoblox_config.yml
 
+## Ignore pyc files
+*.pyc
+
 ## hostnames for ansible
 hosts
 
