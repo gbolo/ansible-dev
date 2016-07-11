@@ -4,8 +4,9 @@ python/infoblox_config.yml
 ## Ignore pyc files
 *.pyc
 
-## hostnames for ansible
+## ansible related
 hosts
+ansible.cfg
 
 ## group vars
 group_vars/*
