@@ -1,4 +1,5 @@
 ---
 terraform_url: "https://releases.hashicorp.com/terraform/0.6.16/terraform_0.6.16_linux_amd64.zip"
 terraform_checksum: "sha256:e10987bca7ec15301bc2fd152795d51cfc9fdbe6c70c9708e6e2ed81eaa1f082"
-terraform_bin: /usr/local/bin/terraform
+terraform_install_dir: /usr/local/bin
+terraform_bin: "{{terraform_install_dir}}/terraform"

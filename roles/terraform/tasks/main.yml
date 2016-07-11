@@ -1,4 +1,18 @@
 ---
 
+# Check if terraform binary already exist, store to tf_bin
+# http://docs.ansible.com/ansible/stat_module.html
+- name: Stat terraform binary
+  local_action: stat path={{terraform_bin}}
+  register: tf_bin
+  become: no
+
+# Download zip only if terraform bins are not present
 - name: Get Terraform release
   get_url: url={{terraform_url}} dest=/tmp/terraform.zip mode=0755 checksum={{terraform_checksum}}
+  when: tf_bin.stat.exists == false
+
+# unzip only if terraform bins are not present
+- name: unzip terraform binary
+  unarchive: src=/tmp/terraform.zip dest={{terraform_install_dir}} copy=no
+  when: tf_bin.stat.exists == false
