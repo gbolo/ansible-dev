@@ -17,3 +17,7 @@ records:
     kibana.linuxctl.com: "10.1.1.21"
   cname:
     kibana.linuxctl.com: dashboard.linuxctl.com
+  ip:
+    - 1.1.1.1
+    - 1.1.1.2
+    - 10.1.1.10 
