@@ -1,0 +1,7 @@
+---
+
+- name: create docker volume mount
+  file: path={{consul_container_volume}} state=directory mode=0755
+
+- name: create docker data volume mount
+  file: path={{consul_container_data_volume}} state=directory mode=0755
