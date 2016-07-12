@@ -11,7 +11,10 @@ pdns_mysql_port: 3306
 pdns_api_enable: yes
 pdns_api_key: changeme
 pdns_api_bind: 0.0.0.0
+pdns_api_port: 8081
+pdns_api_port_expose: "{{pdns_api_port}}"
 
 ### OTHER
 pdns_soa_name: ns.example.com
 pdns_soa_mail: root.example.com
+pdns_container_volume: /opt/dkr_pdns

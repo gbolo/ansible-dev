@@ -1,3 +1,5 @@
+# https://doc.powerdns.com/md/authoritative/settings/
+
 ### Backend config
 launch=gmysql
 gmysql-host={{pdns_mysql_host}}
@@ -11,6 +13,7 @@ experimental-json-interface={{pdns_api_enable}}
 experimental-api-key={{pdns_api_key}}
 webserver={{pdns_api_enable}}
 webserver-address={{pdns_api_bind}}
+webserver-port={{pdns_api_port}}
 
 ### OTHER
 default-soa-name={{pdns_soa_name}}
