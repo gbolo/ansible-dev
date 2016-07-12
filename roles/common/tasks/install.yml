@@ -2,7 +2,7 @@
 # Install common packages
 - name: Install Common Packages
   yum: name={{item}} state=present disable_gpg_check=no
-  with_items: {{common_rpms}}
+  with_items: "{{common_rpms}}"
 
 # Install VMware tools when needed
 - name: Installing VMware Tools
