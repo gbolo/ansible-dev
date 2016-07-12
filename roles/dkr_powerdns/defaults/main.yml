@@ -18,3 +18,4 @@ pdns_api_port_expose: "{{pdns_api_port}}"
 pdns_soa_name: ns.example.com
 pdns_soa_mail: root.example.com
 pdns_container_volume: /opt/dkr_pdns
+pdns_container_state: started
