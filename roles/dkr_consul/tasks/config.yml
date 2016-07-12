@@ -7,7 +7,7 @@
   file: path={{consul_container_config_volume}} state=directory mode=0755
 
 - name: create docker data volume mount
-  file: path={{consul_container_data_volume}} state=directory mode=0755
+  file: path={{consul_container_data_volume}} state=directory mode=0775
 
 - name: Copy main consul config
   template: src=consul.json.j2
