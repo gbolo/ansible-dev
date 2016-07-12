@@ -7,7 +7,7 @@
     state: started
     published_ports:
        - "{{swarm_manager_port}}:{{swarm_manager_port}}"
-    command: "manage -H :{{swarm_manager_port}} --advertise {{swarm_manager_ip}}:{{swarm_manager_port}} consul://{{swarm_consul_ip}}:{{swarm_consul_port}}/{{swarm_consul_path}}"
+    command: "{{swarm_manager_cmd}}"
   when: swarm_is_manager
 
 
@@ -16,5 +16,5 @@
     name: "{{swarm_node_name}}"
     image: "{{swarm_image}}"
     state: started
-    command: "join --advertise '{{ ansible_all_ipv4_addresses | ipaddr(swarm_bind_addr_ip_filter) | random }}':2375 consul://{{swarm_consul_ip}}:{{swarm_consul_port}}/{{swarm_consul_path}}"
+    command: "{{swarm_node_cmd}}"
   when: not swarm_is_manager

@@ -10,3 +10,17 @@ swarm_consul_ip: "10.0.0.10"
 swarm_consul_port: "{{consul_config_port}}"
 swarm_consul_path: swarm
 swarm_bind_addr_ip_filter: "10.0.0.0/24"
+
+# sending list as docker command to support swarm entrypoint
+swarm_manager_cmd:
+  - "manage"
+  - "-H"
+  - "{{swarm_manager_port}}"
+  - "--advertise"
+  - "{{swarm_manager_ip}}:{{swarm_manager_port}}"
+  - "consul://{{swarm_consul_ip}}:{{swarm_consul_port}}/{{swarm_consul_path}}"
+
+swarm_node_cmd:
+  - "join"
+  - "--addr={{swarm_manager_ip}}:{{swarm_manager_port}}"
+  - "consul://{{swarm_consul_ip}}:{{swarm_consul_port}}/{{swarm_consul_path}}"
