@@ -1,5 +1,7 @@
 ---
 
 consul_container_volume: /opt/dkr_consul
+consul_container_config_volume: "{{consul_container_volume}}/config"
 consul_container_data_volume: "{{consul_container_volume}}/data"
 consul_container_state: started
+consul_container_image: "consul"
