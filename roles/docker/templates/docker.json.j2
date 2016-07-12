@@ -5,4 +5,8 @@
 	"debug": {{docker_debug}},
 	"api-cors-headers": "{{docker_api_cors_headers}}",
 	"graph": {{docker_graph}},
+	{% if docker_swarm_enabled -%}
+	"cluster-store": "{{docker_swarm_cluster_store}}",
+	"cluster-advertise": "{{docker_swarm_cluster_advertise}}",
+	{% endif -%}
 }

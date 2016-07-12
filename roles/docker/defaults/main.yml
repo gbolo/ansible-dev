@@ -5,6 +5,11 @@ enable_docker_compose: true
 docker_api_cors_headers: "*"
 docker_graph: "/var/lib/docker"
 
+# docker swarm
+docker_swarm_enabled: false
+docker_swarm_cluster_store: "consul://10.0.0.1:8500"
+docker_swarm_cluster_advertise: "eno1:2375"
+
 # these are variables dropins
 dropins:
   http-api.conf: # var for config name
