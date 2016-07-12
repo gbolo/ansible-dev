@@ -5,4 +5,4 @@
 
 - name: add pdns.conf
   template: src=pdns.conf.j2 dest={{pdns_container_volume}}/pdns.conf mode=0755
-  notify: restart dkr-pdns
+  register: pdns_config

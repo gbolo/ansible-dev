@@ -1,8 +1,1 @@
 ---
-
-- name: restart dkr-pdns
-  docker_container:
-    name: powerdns
-    image: gbolo/powerdns
-    state: started
-    restart: yes

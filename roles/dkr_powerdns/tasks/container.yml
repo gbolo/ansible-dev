@@ -4,7 +4,8 @@
   docker_container:
     name: powerdns
     image: gbolo/powerdns
-    state: {{pdns_container_state}}
+    state: "{{pdns_container_state}}"
+    restart: "{{pdns_config.changed}}"
     restart_policy: always
     volumes:
      - "{{pdns_container_volume}}/pdns.conf:/usr/local/etc/pdns.conf:ro"
