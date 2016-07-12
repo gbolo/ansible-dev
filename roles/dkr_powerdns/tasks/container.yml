@@ -3,7 +3,7 @@
 - name: create pdns container
   docker_container:
     name: powerdns
-    image: gbolo/powerdns
+    image: "{{pdns_container_image}}"
     state: "{{pdns_container_state}}"
     restart: "{{pdns_config.changed}}"
     restart_policy: always

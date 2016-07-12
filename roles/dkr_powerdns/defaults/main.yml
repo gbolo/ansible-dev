@@ -19,3 +19,4 @@ pdns_soa_name: ns.example.com
 pdns_soa_mail: root.example.com
 pdns_container_volume: /opt/dkr_pdns
 pdns_container_state: started
+pdns_container_image: "gbolo/powerdns"
