@@ -4,10 +4,16 @@
   file: path={{consul_container_volume}} state=directory mode=0755
 
 - name: create docker config volume mount
-  file: path={{consul_container_config_volume}} state=directory mode=0755
+  file: path={{consul_container_config_volume}} state=directory
+        owner={{consul_container_volume_owner}}
+        group={{consul_container_volume_group}}
+        mode={{consul_container_volume_mode}}
 
 - name: create docker data volume mount
-  file: path={{consul_container_data_volume}} state=directory mode=0775
+  file: path={{consul_container_data_volume}} state=directory
+        owner={{consul_container_volume_owner}}
+        group={{consul_container_volume_group}}
+        mode={{consul_container_volume_mode}}
 
 - name: Copy main consul config
   template: src=consul.json.j2
