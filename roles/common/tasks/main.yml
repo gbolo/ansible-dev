@@ -1,43 +1,5 @@
 ---
-# EPEL Repo
-- name: Install EPEL YUM Repo
-  yum_repository:
-    name: epel
-    description: EPEL YUM repo
-    baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
-    gpgkey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
-    gpgcheck: yes
-
-# Install common packages
-- name: Install Common Packages
-  yum: name={{item}} state=present disable_gpg_check=no
-  with_items:
-    - libselinux-python
-    - vim
-    - tree
-    - net-tools
-    - tcpdump
-    - nmap
-
-# Install VMware tools when needed
-- name: Installing VMware Tools
-  yum: name=open-vm-tools state=present disable_gpg_check=no
-  when: ansible_virtualization_type == "VMware"
-
-# Ensure VMware Tools is Running and Enabled
-- name: Ensure VMware Tools is Running and Enabled
-  service: name=vmtoolsd state=started enabled=yes
-  when: ansible_virtualization_type == "VMware"
-
-# SSH keys
-- name: Installing Common SSH Key
-  authorized_key:
-    user: root
-    key: "{{ lookup('file', '/root/sshkeys/common.pub') }}"
-    manage_dir: yes
-
-- name: Installing ansible SSH Key
-  authorized_key:
-    user: root
-    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-    manage_dir: yes
+- include: repo.yml
+- include: install.yml
+- include: config.yml
+- include: service.yml

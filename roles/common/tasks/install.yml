@@ -1,0 +1,10 @@
+---
+# Install common packages
+- name: Install Common Packages
+  yum: name={{item}} state=present disable_gpg_check=no
+  with_items: {{common_rpms}}
+
+# Install VMware tools when needed
+- name: Installing VMware Tools
+  yum: name=open-vm-tools state=present disable_gpg_check=no
+  when: ansible_virtualization_type == "VMware"

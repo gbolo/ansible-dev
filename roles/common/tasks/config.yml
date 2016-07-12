@@ -1,0 +1,15 @@
+---
+# SSH keys
+- name: Installing Common SSH Key
+  authorized_key:
+    user: root
+    key: "{{ lookup('file', '/root/sshkeys/common.pub') }}"
+    manage_dir: yes
+    when: {{common_sshkey_enabled}}
+
+- name: Installing ansible SSH Key
+  authorized_key:
+    user: root
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    manage_dir: yes
+    when: {{ansible_sshkey_enabled}}

@@ -1,0 +1,5 @@
+---
+# Ensure VMware Tools is Running and Enabled
+- name: Ensure VMware Tools is Running and Enabled
+  service: name=vmtoolsd state=started enabled=yes
+  when: ansible_virtualization_type == "VMware"

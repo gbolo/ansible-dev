@@ -1,2 +1,11 @@
 ---
-# defaults file for common
+common_sshkey_enabled: false
+ansible_sshkey_enabled: true
+
+common_rpms:
+  - libselinux-python
+  - vim
+  - tree
+  - net-tools
+  - tcpdump
+  - nmap
