@@ -1,0 +1,18 @@
+{
+  {% if consul_config_is_server -%}
+  "server": true,
+  "bootstrap": {{consul_config_server_bootstrap}},
+  {% else -%}
+  "leave_on_terminate": {{consul_config_leave_on_terminate}},
+  "retry_join": ["{{consul_config_server_ip}}"],
+  {% endif -%}
+  "bind_addr": "{{consul_config_bind_addr}}",
+  "datacenter": "{{consul_config_datacenter}}",
+  "domain": "{{consul_config_domain}}",
+  "client_addr": "0.0.0.0",
+  "ui": true,
+  "addresses": {
+        "http": "0.0.0.0"
+   },
+  "recursor": "{{consul_config_recursor}}"
+}

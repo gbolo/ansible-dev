@@ -5,3 +5,13 @@ consul_container_config_volume: "{{consul_container_volume}}/config"
 consul_container_data_volume: "{{consul_container_volume}}/data"
 consul_container_state: started
 consul_container_image: "consul"
+
+## Configuration
+consul_config_is_server: false
+consul_config_server_bootstrap: "true"
+consul_config_server_ip: "10.0.0.1"
+consul_config_leave_on_terminate: "true"
+consul_config_datacenter: "LAB1"
+consul_config_domain: "midgar.local"
+consul_config_recursor: "8.8.8.8"
+consul_config_bind_addr: "0.0.0.0"
