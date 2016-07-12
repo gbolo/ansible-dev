@@ -8,8 +8,11 @@
     restart: "{{pdns_config.changed}}"
     restart_policy: always
     volumes:
-     - "{{pdns_container_volume}}/pdns.conf:/usr/local/etc/pdns.conf:ro"
+      - "{{pdns_container_volume}}/pdns.conf:/usr/local/etc/pdns.conf:ro"
+    exposed_ports:
+      # expose ports not in Dockerfile
+      - "{{pdns_api_port}}"
     ports:
-     - "53:53"
-     - "53:53/udp"
-     - "{{pdns_api_port_expose}}:{{pdns_api_port}}"
+      - "53:53"
+      - "53:53/udp"
+      - "{{pdns_api_port_expose}}:{{pdns_api_port}}"

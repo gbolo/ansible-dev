@@ -5,6 +5,9 @@
     name: "{{swarm_manager_name}}"
     image: "{{swarm_image}}"
     state: started
+    # expose ports not in Dockerfile
+    exposed_ports:
+      - "{{swarm_manager_port}}"
     ports:
       - "{{swarm_manager_port}}:{{swarm_manager_port}}"
     command: "{{swarm_manager_cmd}}"
