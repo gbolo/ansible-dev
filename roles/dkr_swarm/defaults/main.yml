@@ -10,6 +10,8 @@ swarm_consul_ip: "10.0.0.10"
 swarm_consul_port: "{{consul_config_port}}"
 swarm_consul_path: swarm
 swarm_bind_addr_ip_filter: "10.0.0.0/24"
+swarm_node_ip: "{{ansible_default_ipv4.address}}"
+docker_api_port: 2375
 
 # sending list as docker command to support swarm entrypoint
 swarm_manager_cmd:
@@ -22,5 +24,5 @@ swarm_manager_cmd:
 
 swarm_node_cmd:
   - "join"
-  - "--addr={{swarm_manager_ip}}:{{swarm_manager_port}}"
+  - "--addr={{swarm_node_ip}}:{{docker_api_port}}"
   - "consul://{{swarm_consul_ip}}:{{swarm_consul_port}}/{{swarm_consul_path}}"
