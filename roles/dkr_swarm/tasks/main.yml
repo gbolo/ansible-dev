@@ -13,11 +13,11 @@
     command: "{{swarm_manager_cmd}}"
   when: swarm_is_manager
 
-
 - name: create swarm node container
   docker_container:
     name: "{{swarm_node_name}}"
     image: "{{swarm_image}}"
     state: started
     command: "{{swarm_node_cmd}}"
-  when: not swarm_is_manager
+# when: not swarm_is_manager
+  when: swarm_is_node

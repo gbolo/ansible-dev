@@ -4,6 +4,7 @@ swarm_manager_port: 4000
 swarm_manager_name: swarm_manager
 swarm_manager_ip: "0.0.0.0"
 swarm_is_manager: false
+swarm_is_node: true
 swarm_node_name: swarm_node
 swarm_image: swarm
 swarm_consul_ip: "10.0.0.10"
