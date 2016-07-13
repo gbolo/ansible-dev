@@ -26,6 +26,7 @@ tf_json['resource']['powerdns_record'] = {}
 for hostname in creds["records"]["host"]:
     try:
         res_name = hostname.replace(".", "_")
+        res_name = res_name.replace("*", "wildcard")
         zone = '.'.join( hostname.split('.')[1:] )
         ip = creds["records"]["host"][hostname]
         records = []
@@ -38,8 +39,8 @@ for hostname in creds["records"]["host"]:
         tf_json['resource']['powerdns_record'][res_name]['records'] = records
         tf_json['resource']['powerdns_record'][res_name]['zone'] = zone
 
-        # append PTR record if starts with 10.x and boolean set
-        if ip.startswith("10.") and create_ptr:
+        # append PTR record if starts with 10.x and boolean set and no wildcard
+        if ip.startswith("10.") and create_ptr and not hostname.startswith("*"):
             res_name_ptr = res_name + "_ptr"
             zone_ptr = "10.in-addr.arpa"
             records_ptr = []
