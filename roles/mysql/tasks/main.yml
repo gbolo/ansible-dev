@@ -20,8 +20,10 @@
 
 # Copy Database file for import
 - name: copyig database sql file
-- copy: src={{db_import_file}} dest=/tmp
+  copy: src={{db_import_file}} dest=/tmp
+  when: db_import_enable
 
 # Imports file.sql similiar to mysql -u <username> -p <password> < hostname.sql
 - name: Import Database Structure
   mysql_db: state=import name={{db_name}} target=/tmp/{{db_import_file}}
+  when: db_import_enable
