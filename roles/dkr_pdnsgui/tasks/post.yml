@@ -1,0 +1,5 @@
+---
+
+- name: Initializing powerdns-admin database
+  command: docker exec powerdns_admin /usr/bin/python /opt/PowerDNS-Admin/create_db.py
+  when: pdnsgui_init_database
