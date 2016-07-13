@@ -8,7 +8,7 @@
     restart: "{{pdnsgui_config.changed}}"
     restart_policy: always
     volumes:
-      - "{{pdns_container_volume}}/config.py:/opt/PowerDNS-Admin/config.py:ro"
+      - "{{pdnsgui_container_volume}}/config.py:/opt/PowerDNS-Admin/config.py:ro"
     exposed_ports:
       # expose ports not in Dockerfile
       - "{{pdnsgui_exposed_port}}"
