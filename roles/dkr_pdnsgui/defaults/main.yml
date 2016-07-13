@@ -1,0 +1,17 @@
+---
+
+### BACKEND
+pdnsgui_db_host: 10.0.0.1
+pdnsgui_db_name: "powerdnsadmin"
+pdnsgui_db_user: "powerdnsadmin"
+pdnsgui_db_pass: "changeme"
+
+### REST API (3.x)
+pdnsgui_pdns_api_key: changeme
+pdnsgui_pdns_api_port: 8081
+pdnsgui_pdns_api_host: 10.0.0.1
+
+### OTHER
+pdnsgui_container_volume: /opt/dkr_pdnsadmin
+pdnsgui_container_state: started
+pdnsgui_container_image: "gbolo/powerdns:pdnsadmin"

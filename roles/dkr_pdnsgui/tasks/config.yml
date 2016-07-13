@@ -1,0 +1,8 @@
+---
+
+- name: create docker volume mount
+  file: path={{pdnsgui_container_volume}} state=directory mode=0755
+
+- name: add powerdns-admin config
+  template: src=config.py.j2 dest={{pdnsgui_container_volume}}/config.py mode=0755
+  register: pdnsgui_config
