@@ -2,7 +2,7 @@
 
 - name: create pdns container
   docker_container:
-    name: powerdns-admin
+    name: powerdns_admin
     image: "{{pdnsgui_container_image}}"
     state: "{{pdnsgui_container_state}}"
     restart: "{{pdnsgui_config.changed}}"

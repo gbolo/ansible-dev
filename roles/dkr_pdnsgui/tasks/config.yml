@@ -6,3 +6,7 @@
 - name: add powerdns-admin config
   template: src=config.py.j2 dest={{pdnsgui_container_volume}}/config.py mode=0755
   register: pdnsgui_config
+
+- name: Initializing powerdns-admin database
+  command: docker exec powerdns_admin /usr/bin/python /opt/PowerDNS-Admin/create_db.py
+  when: pdnsgui_init_database

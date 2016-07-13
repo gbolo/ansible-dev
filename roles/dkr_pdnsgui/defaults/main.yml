@@ -15,3 +15,6 @@ pdnsgui_pdns_api_host: 10.0.0.1
 pdnsgui_container_volume: /opt/dkr_pdnsadmin
 pdnsgui_container_state: started
 pdnsgui_container_image: "gbolo/powerdns:pdnsadmin"
+
+### INIT DATABASE
+pdnsgui_init_database: false
