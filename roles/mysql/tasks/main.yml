@@ -17,3 +17,11 @@
 - name: create database user
   mysql_user: name={{ db_user_name }} password={{ db_user_pass }} priv={{ db_name }}.*:ALL
               host='{{ db_user_host }}' state=present
+
+# Copy Database file for import
+- name: copyig database sql file
+- copy: src={{db_import_file}} dest=/tmp
+
+# Imports file.sql similiar to mysql -u <username> -p <password> < hostname.sql
+- name: Import Database Structure
+  mysql_db: state=import name={{db_name}} target=/tmp/{{db_import_file}}
