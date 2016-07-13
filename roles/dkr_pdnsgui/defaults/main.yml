@@ -17,7 +17,7 @@ pdnsgui_container_volume: /opt/dkr_pdnsadmin
 pdnsgui_container_state: started
 pdnsgui_container_image: "gbolo/powerdns:pdnsadmin"
 pdnsgui_exposed_port: 9393
-pdnsgui_published_port: "{{pdnsgui_published_port}}"
+pdnsgui_published_port: "{{pdnsgui_exposed_port}}"
 
 ### INIT DATABASE
 pdnsgui_init_database: false
