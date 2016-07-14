@@ -22,6 +22,19 @@ tf_json['provider']['powerdns']['api_key'] = creds["powerdns"]["api_key"]
 tf_json['resource'] = {}
 tf_json['resource']['powerdns_record'] = {}
 
+def add_record(res_name, record_type, ttl, name, record, zone):
+    global tf_json
+    if res_name in tf_json['resource']['powerdns_record']:
+        tf_json['resource']['powerdns_record'][res_name]['records'].append(record)
+    else:
+        tf_json['resource']['powerdns_record'][res_name] = {}
+        tf_json['resource']['powerdns_record'][res_name]['type'] = record_type
+        tf_json['resource']['powerdns_record'][res_name]['ttl'] = ttl
+        tf_json['resource']['powerdns_record'][res_name]['name'] = name
+        tf_json['resource']['powerdns_record'][res_name]['records'] = []
+        tf_json['resource']['powerdns_record'][res_name]['records'].append(record)
+        tf_json['resource']['powerdns_record'][res_name]['zone'] = zone
+
 # generate tf json
 for hostname in creds["records"]["host"]:
     try:
@@ -29,30 +42,17 @@ for hostname in creds["records"]["host"]:
         res_name = res_name.replace("*", "wildcard")
         zone = '.'.join( hostname.split('.')[1:] )
         ip = creds["records"]["host"][hostname]
-        records = []
-        records.append(ip)
         # append A record
-        tf_json['resource']['powerdns_record'][res_name] = {}
-        tf_json['resource']['powerdns_record'][res_name]['type'] = "A"
-        tf_json['resource']['powerdns_record'][res_name]['ttl'] = "300"
-        tf_json['resource']['powerdns_record'][res_name]['name'] = hostname
-        tf_json['resource']['powerdns_record'][res_name]['records'] = records
-        tf_json['resource']['powerdns_record'][res_name]['zone'] = zone
+        add_record(res_name, "A", "300", hostname, ip, zone)
 
         # append PTR record if starts with 10.x and boolean set and no wildcard
         if ip.startswith("10.") and create_ptr and not hostname.startswith("*"):
-            res_name_ptr = res_name + "_ptr"
+            res_name_ptr = ip + "_ptr"
+            res_name_ptr = res_name_ptr.replace(".", "_")
             zone_ptr = "10.in-addr.arpa"
-            records_ptr = []
-            records_ptr.append(hostname)
             name_ptr = '.'.join( ip.split('.')[-1:0:-1] ) + "." + zone_ptr
             # append ptr record
-            tf_json['resource']['powerdns_record'][res_name_ptr] = {}
-            tf_json['resource']['powerdns_record'][res_name_ptr]['type'] = "PTR"
-            tf_json['resource']['powerdns_record'][res_name_ptr]['ttl'] = "3600"
-            tf_json['resource']['powerdns_record'][res_name_ptr]['name'] = name_ptr
-            tf_json['resource']['powerdns_record'][res_name_ptr]['records'] = records_ptr
-            tf_json['resource']['powerdns_record'][res_name_ptr]['zone'] = zone_ptr
+            add_record(res_name_ptr, "PTR", "3600", name_ptr, hostname, zone_ptr)
 
     except Exception as e:
         print(e)
