@@ -3,7 +3,7 @@
 - name: create registrator container
   docker_container:
     name: "{{registrator_name}}"
-    image: "{{consul_container_image}}"
+    image: "{{registrator_image}}"
     network_mode: bridge
     restart_policy: always
     volumes:
