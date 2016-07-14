@@ -2,7 +2,7 @@
   {% if consul_config_is_server -%}
   "server": true,
   "bootstrap": {{consul_config_server_bootstrap}},
-  "advertise_addr": {{consul_config_advertise_addr}},
+  "advertise_addr": "{{consul_config_advertise_addr}}",
   {% else -%}
   "leave_on_terminate": {{consul_config_leave_on_terminate}},
   "retry_join": ["{{consul_config_server_ip}}"],
