@@ -1,0 +1,6 @@
+---
+
+registrator_docker_socket: "/var/run/docker.sock"
+registrator_endpoint: "consul://10.113.0.21:8500"
+registrator_image: "gliderlabs/registrator"
+registrator_name: "registrator"
