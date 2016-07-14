@@ -10,7 +10,7 @@ consul_container_network: "host"
 ## Configuration
 consul_config_node_name: "{{ansible_hostname}}"
 consul_config_is_server: false
-consul_config_server_bootstrap: "true"
+consul_config_server_bootstrap: "false"
 consul_config_server_ip: "10.0.0.1"
 consul_config_leave_on_terminate: "true"
 consul_config_datacenter: "LAB1"
