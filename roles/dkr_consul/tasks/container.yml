@@ -4,7 +4,7 @@
   docker_container:
     name: consul
     image: "{{consul_container_image}}"
-    network_mode: bridge
+    network_mode: "{{consul_container_network}}"
     restart_policy: always
     volumes:
        - "{{consul_container_config_volume}}:/consul/config"

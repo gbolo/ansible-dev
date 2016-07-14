@@ -1,17 +1,22 @@
 {
   {% if consul_config_is_server -%}
   "server": true,
-  "bootstrap": {{consul_config_server_bootstrap}},
-  "advertise_addr": "{{consul_config_advertise_addr}}",
+  "advertise_addr_wan": "{{consul_config_advertise_addr}}",
   {% else -%}
   "leave_on_terminate": {{consul_config_leave_on_terminate}},
   "retry_join": ["{{consul_config_server_ip}}"],
+  {% endif -%}
+  {% if consul_config_server_bootstrap == "true" -%}
+  "bootstrap": {{consul_config_server_bootstrap}},
+  {% else -%}
+  "start_join_wan": ["{{consul_config_server_ip}}"],
   {% endif -%}
   "bind_addr": "{{consul_config_bind_addr}}",
   "datacenter": "{{consul_config_datacenter}}",
   "domain": "{{consul_config_domain}}",
   "client_addr": "0.0.0.0",
   "ui": true,
+  "node_name": "{{consul_config_node_name}}",
   "addresses": {
         "http": "0.0.0.0"
    },
