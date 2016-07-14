@@ -18,3 +18,7 @@ terraform/*-vars.tf
 ## terraform state
 terraform/*.tfstate
 terraform/*.tfstate.backup
+
+## terraform other
+terraform/*.disabled
+terraform/*.disable
