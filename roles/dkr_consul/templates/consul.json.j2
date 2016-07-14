@@ -1,7 +1,7 @@
 {
   {% if consul_config_is_server -%}
   "server": true,
-  "advertise_addr_wan": "{{consul_config_advertise_addr}}",
+  "advertise_addr": "{{consul_config_advertise_addr}}",
   {% else -%}
   "leave_on_terminate": {{consul_config_leave_on_terminate}},
   "retry_join": ["{{consul_config_server_ip}}"],
@@ -9,7 +9,7 @@
   {% if consul_config_server_bootstrap == "true" -%}
   "bootstrap": {{consul_config_server_bootstrap}},
   {% else -%}
-  "start_join_wan": ["{{consul_config_server_ip}}"],
+  "start_join": ["{{consul_config_server_ip}}"],
   {% endif -%}
   "bind_addr": "{{consul_config_bind_addr}}",
   "datacenter": "{{consul_config_datacenter}}",
