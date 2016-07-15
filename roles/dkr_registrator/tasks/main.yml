@@ -4,7 +4,7 @@
   docker_container:
     name: "{{registrator_name}}"
     image: "{{registrator_image}}"
-    network_mode: bridge
+    network_mode: host
     restart_policy: always
     volumes:
        - "{{registrator_docker_socket}}:/tmp/docker.sock:ro"
