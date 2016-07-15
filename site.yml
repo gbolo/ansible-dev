@@ -1,0 +1,18 @@
+---
+# common
+- hosts: all
+  roles:
+    - common
+
+# consul
+- hosts: consul*
+  roles:
+    - docker
+    - dkr_consul
+
+# swarm
+- hosts: docker*
+  roles:
+    - docker
+    - dkr_swarm
+    - dkr_registrator

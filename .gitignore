@@ -22,3 +22,6 @@ terraform/*.tfstate.backup
 ## terraform other
 terraform/*.disabled
 terraform/*.disable
+
+## misc
+*.githide
