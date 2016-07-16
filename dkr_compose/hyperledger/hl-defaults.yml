@@ -1,0 +1,28 @@
+# This is for testing purposes only
+# See https://github.com/hyperledger/fabric/blob/master/docs/dev-setup/devnet-setup.md#using-consensus-plugin for more details.
+version: "2"
+
+services:
+  vp:
+    image: gbolo/hyperledger-peer:pbft-master
+    restart: unless-stopped
+    environment:
+      - CORE_PEER_ADDRESSAUTODETECT=true
+      - CORE_PEER_NETWORKID=dev
+      - CORE_LOGGING_LEVEL=info  #critical, error, warning, notice, info, debug
+      # The following section enables pbft consensus
+      - CORE_PEER_VALIDATOR_CONSENSUS_PLUGIN=pbft  # noops, pbft
+      - CORE_PBFT_GENERAL_MODE=batch  # batch, classic, sieve
+      - CORE_PBFT_GENERAL_N=4
+      - CORE_PBFT_GENERAL_TIMEOUT_REQUEST=10s
+      #- CORE_VM_ENDPOINT=http://172.17.0.1:2375
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=hyperledger_overlay1
+    expose:
+      - "30303"
+      - "30304"
+      - "31315"
+    volumes: # docker.sock is mapped as the default CORE_VM_ENDPOINT
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: peer node start  # this repeats the default cmd to make sure
+    networks:
+      - overlay1

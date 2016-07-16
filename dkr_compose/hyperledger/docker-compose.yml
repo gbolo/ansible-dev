@@ -1,0 +1,49 @@
+# This is for testing purposes only
+# See https://github.com/hyperledger/fabric/blob/master/docs/Setup/Network-setup.md for more details.
+version: "2"
+
+services:
+  vp0:
+    container_name: "vp0"
+    extends:
+      file: hl-defaults.yml
+      service: vp
+    hostname: vp0
+    environment:
+      - CORE_PEER_ID=vp0
+
+  vp1:
+    container_name: "vp1"
+    extends:
+      file: hl-defaults.yml
+      service: vp
+    hostname: vp1
+    environment:
+      - CORE_PEER_ID=vp1
+      - CORE_PEER_DISCOVERY_ROOTNODE=vp0:30303
+
+  vp2:
+    container_name: "vp2"
+    extends:
+      file: hl-defaults.yml
+      service: vp
+    hostname: vp2
+    environment:
+      - CORE_PEER_ID=vp2
+      - CORE_PEER_DISCOVERY_ROOTNODE=vp0:30303
+
+  vp3:
+    container_name: "vp3"
+    extends:
+      file: hl-defaults.yml
+      service: vp
+    hostname: vp3
+    environment:
+      - CORE_PEER_ID=vp3
+      - CORE_PEER_DISCOVERY_ROOTNODE=vp0:30303
+    ports:
+      - "5000:5000"
+
+networks:
+  overlay1:
+    driver: overlay
