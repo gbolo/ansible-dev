@@ -5,6 +5,7 @@
     name: "{{swarm_manager_name}}"
     image: "{{swarm_image}}"
     state: started
+    restart_policy: always
     # expose ports not in Dockerfile
     exposed_ports:
       - "{{swarm_manager_port}}"
@@ -18,6 +19,7 @@
     name: "{{swarm_node_name}}"
     image: "{{swarm_image}}"
     state: started
+    restart_policy: always
     command: "{{swarm_node_cmd}}"
 # when: not swarm_is_manager
   when: swarm_is_node
