@@ -1,4 +1,57 @@
 ---
-myapp_db_name: demo
-myapp_db_user_name: demo
-myapp_db_user_pass: "{{ vault_db_user_pass }}"
+# environment specific
+env_consul_datacenter: "lab1"
+env_consul_domain: "lab1.midgar"
+env_consul_recursor: "8.8.8.8"
+env_local_consul: "consul://{{ansible_default_ipv4.address}}:8500"
+env_swarm_manager_host: "10.1.1.1"
+env_swarm_manager_ip: "10.1.1.2"
+env_consul_server_join: "10.1.1.3"
+
+# common
+common_sshkey_enabled: false
+ansible_sshkey_enabled: true
+
+# docker
+docker_debug: false
+enable_docker_compose: true
+docker_api_cors_headers: "*"
+docker_swarm_enabled: false
+docker_swarm_cluster_store: "{{env_local_consul}}"
+docker_swarm_cluster_advertise: "eno16780032:2375"
+
+# consul
+consul_container_network: "host"
+consul_config_node_name: "{{ansible_hostname}}"
+consul_config_is_server: false
+consul_config_server_bootstrap: "false"
+consul_config_server_ip: "{{env_consul_server_join}}"
+consul_config_datacenter: "{{env_consul_datacenter}}"
+consul_config_domain: "{{env_consul_domain}}"
+consul_config_recursor: "{{env_consul_recursor}}"
+consul_config_bind_addr: "{{ansible_default_ipv4.address}}"
+consul_config_dns_port: 8600
+consul_config_advertise_addr: "{{ansible_default_ipv4.address}}"
+consul_config_client_addr: "{{ansible_default_ipv4.address}}"
+
+# swarm
+swarm_manager_port: 4000
+swarm_manager_name: swarm_manager
+swarm_manager_ip: "{{env_swarm_manager_ip}}"
+swarm_is_manager: false
+swarm_is_node: true
+swarm_node_name: swarm_node
+swarm_image: swarm
+swarm_consul_ip: "{{ansible_default_ipv4.address}}"
+swarm_consul_port: "{{consul_config_port}}"
+swarm_consul_path: swarm
+swarm_bind_addr_ip_filter: "10.0.0.0/24"
+swarm_node_ip: "{{ansible_default_ipv4.address}}"
+docker_api_port: 2375
+consul_config_port: 8500
+
+# registrator
+registrator_docker_socket: "/var/run/docker.sock"
+registrator_endpoint: "{{env_local_consul}}"
+registrator_image: "gliderlabs/registrator"
+registrator_name: "registrator"
