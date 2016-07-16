@@ -1,8 +1,8 @@
 ---
 docker_pkg_state: present
-docker_debug: false
+docker_debug: "false"
 enable_docker_compose: true
-docker_api_cors_headers: "*"
+docker_api_cors_header: "*"
 docker_graph: "/var/lib/docker"
 
 # docker swarm

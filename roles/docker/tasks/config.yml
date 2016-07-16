@@ -33,6 +33,6 @@
   file: path=/etc/docker state=directory mode=0600
 
 # configure docker deamon json file
-- name: configure docker.json
-  template: src=docker.json.j2 dest=/etc/docker/docker.json mode=0755
+- name: configure docker daemon.json
+  template: src=daemon.json.j2 dest=/etc/docker/daemon.json mode=0755
   notify: restart docker
