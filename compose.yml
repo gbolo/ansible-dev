@@ -1,0 +1,26 @@
+- name: Run using a project directory
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - docker_service:
+        docker_host: 'tcp://mid-docker01.lab1.midgar.local:4000'
+        project_src: dkr_compose/hyperledger
+        state: absent
+
+    - docker_service:
+        docker_host: 'tcp://mid-docker01.lab1.midgar.local:4000'
+        project_src: dkr_compose/hyperledger
+      register: output
+
+    - debug: var=output
+
+    - docker_service:
+        project_src: dkr_compose/hyperledger
+        build: no
+      register: output
+
+    - debug: var=output
+
+    - assert:
+        that: "not output.changed "
