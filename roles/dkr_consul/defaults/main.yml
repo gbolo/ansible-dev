@@ -11,6 +11,7 @@ consul_container_network: "host"
 consul_config_node_name: "{{ansible_hostname}}"
 consul_config_is_server: false
 consul_config_server_bootstrap: "false"
+consul_config_bootstrap_expect: 3
 consul_config_server_ip: "10.0.0.1"
 consul_config_leave_on_terminate: "true"
 consul_config_datacenter: "LAB1"
@@ -25,3 +26,6 @@ consul_config_client_addr: "{{ansible_default_ipv4.address}}"
 consul_container_volume_owner: root
 consul_container_volume_group: root
 consul_container_volume_mode: 0777
+
+## SPECIAL
+consul_delete_data: false

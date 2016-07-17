@@ -1,2 +1,4 @@
 ---
-# handlers file for dkr_consul
+# restart consul container
+- name: restart consul container
+  command: docker restart consul

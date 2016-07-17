@@ -1,5 +1,19 @@
 ---
 
+# delete consul data
+- block:
+
+  - name: stop consul container
+    command: docker stop consul
+    ignore_errors: yes
+
+  - name: delete consul data
+    file: path={{consul_container_data_volume}} state=absent
+    notify: restart consul container
+
+  when: consul_delete_data
+
+# other tasks
 - name: create docker volume mount
   file: path={{consul_container_volume}} state=directory mode=0755
 

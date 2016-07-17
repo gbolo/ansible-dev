@@ -7,7 +7,7 @@
   "retry_join": ["{{consul_config_server_ip}}"],
   {% endif -%}
   {% if consul_config_server_bootstrap == "true" -%}
-  "bootstrap": {{consul_config_server_bootstrap}},
+  "bootstrap_expect": {{consul_config_bootstrap_expect}},
   {% else -%}
   "start_join": ["{{consul_config_server_ip}}"],
   {% endif -%}
