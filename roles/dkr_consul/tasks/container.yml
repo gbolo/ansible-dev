@@ -5,7 +5,8 @@
     name: consul
     image: "{{consul_container_image}}"
     network_mode: "{{consul_container_network}}"
-    restart_policy: always
+    # disable restart_policy due to this bug: #3864
+    #restart_policy: always
     volumes:
        - "{{consul_container_config_volume}}:/consul/config"
        - "{{consul_container_data_volume}}:/consul/data"

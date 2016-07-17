@@ -6,7 +6,8 @@
     image: "{{pdns_container_image}}"
     state: "{{pdns_container_state}}"
     restart: "{{pdns_config.changed}}"
-    restart_policy: always
+    # disable restart_policy due to this bug: #3864
+    #restart_policy: always
     volumes:
       - "{{pdns_container_volume}}/pdns.conf:/usr/local/etc/pdns.conf:ro"
     exposed_ports:

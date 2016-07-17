@@ -6,7 +6,8 @@
     image: "{{pdnsgui_container_image}}"
     state: "{{pdnsgui_container_state}}"
     restart: "{{pdnsgui_config.changed}}"
-    restart_policy: always
+    # disable restart_policy due to this bug: #3864
+    #restart_policy: always
     volumes:
       - "{{pdnsgui_container_volume}}/config.py:/opt/PowerDNS-Admin/config.py:ro"
     exposed_ports:

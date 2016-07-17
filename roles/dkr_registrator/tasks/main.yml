@@ -5,7 +5,8 @@
     name: "{{registrator_name}}"
     image: "{{registrator_image}}"
     network_mode: host
-    restart_policy: always
+    # disable restart_policy due to this bug: #3864
+    #restart_policy: always
     volumes:
        - "{{registrator_docker_socket}}:/tmp/docker.sock:ro"
     command: "{{registrator_endpoint}}"
