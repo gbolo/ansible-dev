@@ -1,5 +1,5 @@
 # This is for testing purposes only
-# See https://github.com/hyperledger/fabric/blob/master/docs/dev-setup/devnet-setup.md#using-consensus-plugin for more details.
+# See https://github.com/hyperledger/fabric/blob/master/docs/Setup/Network-setup.md for more details.
 version: "2"
 
 services:
@@ -9,10 +9,9 @@ services:
     environment:
       - CORE_PEER_ADDRESSAUTODETECT=true
       - CORE_PEER_NETWORKID=dev
-      - CORE_LOGGING_LEVEL=info  #critical, error, warning, notice, info, debug
-      # The following section enables pbft consensus
+      - CORE_LOGGING_LEVEL=info  # critical, error, warning, notice, info, debug
       - CORE_PEER_VALIDATOR_CONSENSUS_PLUGIN=pbft  # noops, pbft
-      - CORE_PBFT_GENERAL_MODE=batch  # batch, classic, sieve
+      - CORE_PBFT_GENERAL_MODE=batch
       - CORE_PBFT_GENERAL_N=4
       - CORE_PBFT_GENERAL_TIMEOUT_REQUEST=10s
       #- CORE_VM_ENDPOINT=http://172.17.0.1:2375
@@ -21,8 +20,8 @@ services:
       - "30303"
       - "30304"
       - "31315"
-    volumes: # docker.sock is mapped as the default CORE_VM_ENDPOINT
+    volumes: # use if docker.sock is mapped to CORE_VM_ENDPOINT
       - /var/run/docker.sock:/var/run/docker.sock
-    command: peer node start  # this repeats the default cmd to make sure
+    command: peer node start
     networks:
       - overlay1
