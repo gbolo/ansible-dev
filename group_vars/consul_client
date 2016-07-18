@@ -1,0 +1,3 @@
+---
+consul_config_is_server: false
+consul_config_server_bootstrap: "false"

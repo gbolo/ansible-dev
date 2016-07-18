@@ -1,0 +1,4 @@
+---
+consul_config_is_server: true
+consul_config_server_bootstrap: "true"
+consul_config_bootstrap_expect: 3
