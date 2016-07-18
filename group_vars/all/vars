@@ -13,7 +13,7 @@ common_sshkey_enabled: false
 ansible_sshkey_enabled: true
 
 # docker
-docker_debug: false
+docker_debug: "false"
 enable_docker_compose: true
 docker_api_cors_headers: "*"
 docker_swarm_enabled: false
