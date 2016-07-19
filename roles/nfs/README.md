@@ -1,4 +1,4 @@
-NFS Role
+Ansible NFS Role
 =========
 
 A simple role for redhat/centos based servers to provide/consume nfs services
@@ -26,7 +26,7 @@ nfs_server_exports:
     acl: "10.1.1.0/24"
     opts: "rw,sync,no_root_squash,no_all_squash"
 ```
-The directories listed above **do not** need to pre-exists. This role will create them for you.
+The directories listed above **do not** need to pre-exist. This role will create them for you.
 
 ### NFS Client
 for an NFS server we need to set the variable `nfs_client` to true (default setting). Then you can simply define your mounts as follows:
@@ -43,7 +43,7 @@ nfs_client_mounts:
     fs: "nfs4"
     opts: "defaults"
 ```
-The directories listed above **do not** need to pre-exists. This role will create them for you.
+The directories listed above **do not** need to pre-exist. This role will create them for you.
 
 Dependencies
 ------------
