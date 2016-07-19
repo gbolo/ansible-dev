@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for name, export in nfs_server_exports.items() %}
+{{export["src_dir"]}}   {{export["acl"]}}({{export["opts"]}})
+{% endfor %}

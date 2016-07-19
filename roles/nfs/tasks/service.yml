@@ -1,0 +1,16 @@
+---
+
+- name: Ensure NFS client related services
+  service: name=rpcbind state=started enabled=yes
+  when: nfs_client
+
+- name: Ensure NFS server related services
+  service: name={{item}} state=started enabled=yes
+  with_items:
+    - rpcbind
+    - nfs-server
+    - nfs-config
+    - nfs-mountd
+    - nfs-idmapd
+    - rpc-statd
+  when: nfs_server

@@ -1,0 +1,34 @@
+---
+## NFS SERVER EXPORTS
+nfs_server_exports:
+  iso:
+    src_dir: "/opt/iso"
+    src_dir_mode: "0775"
+    src_dir_owner: "root"
+    src_dir_group: "root"
+    acl: "10.0.0.0/8"
+    opts: "rw,sync,no_root_squash,no_all_squash"
+  www:
+    src_dir: "/opt/www"
+    src_dir_mode: "0775"
+    src_dir_owner: "nginx"
+    src_dir_group: "nginx"
+    acl: "10.1.1.0/24"
+    opts: "rw,sync,no_root_squash,no_all_squash"
+
+## NFS CLIENT MOUNTS
+nfs_client_mounts:
+  iso:
+    path: "/mnt/iso"
+    mount: "10.1.1.1:/opt/iso"
+    fs: "nfs4"
+    opts: "defaults"
+  www:
+    path: "/mnt/www"
+    mount: "10.1.1.1:/opt/www"
+    fs: "nfs4"
+    opts: "defaults"
+
+## SPECIAL
+nfs_client: true
+nfs_server: false

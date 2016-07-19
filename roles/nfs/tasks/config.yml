@@ -1,0 +1,36 @@
+---
+
+# server config
+- block:
+
+  - name: Copy exports
+    template: src=exports.j2
+              dest=/etc/exports
+              owner=root group=root mode=644
+    notify: reload nfs exports
+
+  - name: create nfs export directories
+    file: path={{ item.value.src_dir }} state=directory
+          owner={{ item.value.src_dir_owner }}
+          group={{ item.value.src_dir_group }}
+          mode={{ item.value.src_dir_mode }}
+    with_dict: "{{ nfs_server_exports }}"
+
+  when: nfs_server
+
+# client config
+- block:
+
+  - name: create nfs mount local directories
+    file: path={{ item.value.path }} state=directory
+    with_dict: "{{ nfs_client_mounts }}"
+
+  - name: mount nfs volumes
+    mount: name={{ item.value.path }}
+           src='{{ item.value.mount }}'
+           fstype={{ item.value.fs }}
+           opts='{{ item.value.opts }}'
+           state=mounted
+    with_dict: "{{ nfs_client_mounts }}"
+
+  when: nfs_client
