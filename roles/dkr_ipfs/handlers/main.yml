@@ -1,0 +1,4 @@
+---
+# restart consul container
+- name: restart ipfs container
+  command: docker restart {{ipfs_container_name}}

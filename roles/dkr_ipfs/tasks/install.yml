@@ -1,0 +1,6 @@
+---
+# This is needed for ansible to manage containers
+- name: Install Required Packages
+  yum: name={{item}} state=present disable_gpg_check=no
+  with_items:
+    - python-docker-py

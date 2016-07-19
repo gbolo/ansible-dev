@@ -1,0 +1,33 @@
+---
+## since hash_behaviour=replace
+
+## Conatiner info
+ipfs_container_name: "ipfs"
+ipfs_container_image: "ipfs/go-ipfs"
+ipfs_container_volume: /opt/dkr_ipfs
+ipfs_container_data_volume: "{{ipfs_container_volume}}/data"
+ipfs_container_config_volume: "{{ipfs_container_volume}}/config"
+
+## IPFS configuration
+ipfs_config_api_httpheaders: "null"
+ipfs_config_addresses_api: "/ip4/0.0.0.0/tcp/5001"
+ipfs_config_addresses_gateway: "/ip4/0.0.0.0/tcp/8080"
+ipfs_config_addresses_swarm:
+  - "/ip4/0.0.0.0/tcp/4001"
+  - "/ip6/::/tcp/4001"
+ipfs_config_bootstrap:
+  - "/ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ"
+  - "/ip4/104.236.176.52/tcp/4001/ipfs/QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z"
+ipfs_config_datastore_BloomFilterSize: 0
+ipfs_config_datastore_GCPeriod: "1h"
+ipfs_config_datastore_HashOnRead: "false"
+ipfs_config_datastore_NoSync: "false"
+ipfs_config_datastore_Params: "null"
+ipfs_config_datastore_Path: "/data/ipfs/datastore"
+ipfs_config_datastore_StorageGCWatermark: 90
+ipfs_config_datastore_StorageMax: "1GB"
+ipfs_config_datastore_Type: "leveldb"
+
+## SPECIAL
+ipfs_delete_data: false
+ipfs_enable_data_volume: true
