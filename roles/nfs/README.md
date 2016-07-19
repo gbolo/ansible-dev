@@ -1,38 +1,61 @@
-Role Name
+NFS Role
 =========
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+A simple role for redhat/centos based servers to provide/consume nfs services
 
 Role Variables
 --------------
+All aspects of this role are controled via variables.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### NFS Server
+for an NFS server we need to set the variable `nfs_server` to true. Then you can simply define your exports as follows:
+```
+nfs_server_exports:
+  iso:
+    src_dir: "/opt/iso"
+    src_dir_mode: "0775"
+    src_dir_owner: "root"
+    src_dir_group: "root"
+    acl: "10.0.0.0/8"
+    opts: "rw,sync,no_root_squash,no_all_squash"
+  www:
+    src_dir: "/opt/www"
+    src_dir_mode: "0775"
+    src_dir_owner: "nginx"
+    src_dir_group: "nginx"
+    acl: "10.1.1.0/24"
+    opts: "rw,sync,no_root_squash,no_all_squash"
+```
+The directories listed above **do not** need to pre-exists. This role will create them for you.
+
+### NFS Client
+for an NFS server we need to set the variable `nfs_client` to true (default setting). Then you can simply define your mounts as follows:
+```
+nfs_client_mounts:
+  iso:
+    path: "/mnt/iso"
+    mount: "10.1.1.1:/opt/iso"
+    fs: "nfs4"
+    opts: "defaults"
+  www:
+    path: "/mnt/www"
+    mount: "10.1.1.1:/opt/www"
+    fs: "nfs4"
+    opts: "defaults"
+```
+The directories listed above **do not** need to pre-exists. This role will create them for you.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Required rpm packages are installed automatically by this role.
 
-Example Playbook
-----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
+Author and License
 -------
+`nfs` role written by:
+ - George Bolo | [linuxctl.com](https://linuxctl.com)
 
-BSD
+License: **MIT**
 
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+`FREE SOFTWARE, HELL YEAH!`
