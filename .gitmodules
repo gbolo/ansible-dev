@@ -1,0 +1,3 @@
+[submodule "roles/nfs"]
+	path = roles/nfs
+	url = https://github.com/gbolo/ansible-nfs
