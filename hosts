@@ -1,26 +1,28 @@
 # Example of hosts file
 
 [all]
-ansible.linuxctl.com
-elasticsearch1.aws.linuxctl.com
-elasticsearch2.do.linuxctl.com
-logstash1.aws.linuxctl.com
-logstash2.do.linuxctl.com
-kibana.linuxctl.com
+mid-docker01.lab1.midgar.local
+mid-docker02.lab1.midgar.local
+mid-consul01.lab1.midgar.local
+mid-consul02.lab1.midgar.local
+mid-consul03.lab1.midgar.local
 
 [control]
-ansible.linuxctl.com
 
-[docker]
-ansible.linuxctl.com
+[docker_swarm_manager]
+mid-docker01.lab1.midgar.local
 
-[elasticsearch]
-elasticsearch1.aws.linuxctl.com
-elasticsearch2.do.linuxctl.com
+[docker_swarm]
+mid-docker01.lab1.midgar.local
+mid-docker02.lab1.midgar.local
 
-[logstash]
-logstash1.aws.linuxctl.com
-logstash2.do.linuxctl.com
+[consul_server]
+mid-consul02.lab1.midgar.local
+mid-consul03.lab1.midgar.local
 
-[kibana]
-kibana.linuxctl.com
+[consul_server_bootstrap]
+mid-consul01.lab1.midgar.local
+
+[consul_client]
+mid-docker01.lab1.midgar.local
+mid-docker02.lab1.midgar.local
