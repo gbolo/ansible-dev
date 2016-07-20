@@ -8,29 +8,41 @@
     ignore_errors: yes
 
   - name: delete ipfs data volume
-    file: path={{ipfs_container_data_volume}} state=absent
+    file:
+      path: "{{ipfs_container_data_volume}}"
+      state: absent
     notify: restart ipfs container
 
   when: ipfs_delete_data
 
 # other tasks
 - name: create docker volume mount
-  file: path={{ipfs_container_volume}} state=directory mode=0755
+  file:
+    path: "{{ipfs_container_volume}}"
+    state: directory
+    mode: "0755"
 
 - name: create docker config volume mount
-  file: path={{ipfs_container_config_volume}} state=directory
-        owner={{ipfs_container_volume_owner}}
-        group={{ipfs_container_volume_group}}
-        mode={{ipfs_container_volume_mode}}
+  file:
+    path: "{{ipfs_container_config_volume}}"
+    state: directory
+    owner: "{{ipfs_container_volume_owner}}"
+    group: "{{ipfs_container_volume_group}}"
+    mode: "{{ipfs_container_volume_mode}}"
 
 - name: create docker data volume mount
-  file: path={{ipfs_container_data_volume}} state=directory
-        owner={{ipfs_container_volume_owner}}
-        group={{ipfs_container_volume_group}}
-        mode={{ipfs_container_volume_mode}}
+  file:
+    path: "{{ipfs_container_data_volume}}"
+    state: directory
+    owner: "{{ipfs_container_volume_owner}}"
+    group: "{{ipfs_container_volume_group}}"
+    mode: "{{ipfs_container_volume_mode}}"
   when: ipfs_enable_data_volume
 
 - name: Copy main ipfs config
-  template: src=config.j2
-            dest={{ipfs_container_config_volume}}/config
-            owner=root group=root mode=644
+  template:
+    src: config.j2
+    dest: "{{ipfs_container_config_volume}}/config"
+    owner: root
+    group: root
+    mode: "644"
