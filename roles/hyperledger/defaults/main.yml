@@ -1,0 +1,112 @@
+---
+# CONFIG - CLI
+core_cli_address: "0.0.0.0:30304"
+
+# CONFIG - REST
+core_rest_enabled: "true"
+core_rest_address: "0.0.0.0:5000"
+core_rest_validPatterns_enrollmentID: "'^\w+$'"
+
+# CONFIG - LOGGING
+core_logging_peer: "warning"
+core_logging_node: "info"
+core_logging_network: "warning"
+core_logging_chaincode: "warning"
+core_logging_version: "warning"
+
+# CONFIG - PEER
+core_peer_version: "0.1.0"
+core_peer_id: "jdoe"
+core_peer_privateKey: false
+core_peer_networkId: "dev"
+core_peer_listenAddress: "0.0.0.0:30303"
+core_peer_address: "0.0.0.0:30303"
+core_peer_addressAutoDetect: "false"
+core_peer_gomaxprocs: "-1"
+core_peer_workers: 2
+# PEER SYNC REALTED
+core_peer_sync_blocks_channelSize: 10
+core_peer_sync_state_snapshot_channelSize: 50
+core_peer_sync_state_deltas_channelSize: 20
+# PEER VALIDATOR RELATED
+core_peer_validator_enabled: "true"
+core_peer_validator_consensus_plugin: "noops"
+core_peer_validator_consensus_buffersize: 1000
+core_peer_validator_events_address: "0.0.0.0:31315"
+core_peer_validator_events_buffersize: 100
+core_peer_validator_events_timeout: 10
+# PEER TLS
+core_peer_tls_enabled: "false"
+core_peer_tls_cert_file: "testdata/server1.pem"
+core_peer_tls_key_file: "testdata/server1.key"
+core_peer_tls_serverhostoverride: ""
+# PEER PKI
+core_peer_pki_eca_paddr: "localhost:50051"
+core_peer_pki_tca_paddr: "localhost:50051"
+core_peer_pki_tlsca_paddr: "localhost:50051"
+core_peer_pki_tls_enabled: "false"
+core_peer_pki_tls_rootcert_file: "tlsca.cert"
+core_peer_pki_tls_serverhostoverride: ""
+# PEER DISCOVERY
+core_peer_discovery_rootnode: ""
+core_peer_discovery_period: "5s"
+core_peer_discovery_persist: "true"
+core_peer_discovery_touchPeriod: "6s"
+core_peer_discovery_touchMaxNodes: 100
+# PEER LEDGER DATA
+core_peer_fileSystemPath: "/var/hyperledger/production"
+core_peer_profile_enabled: "false"
+core_peer_profile_listenAddress: "0.0.0.0:6060"
+
+# CONFIG VM SECTION
+core_vm_endpoint: "unix:///var/run/docker.sock"
+core_vm_docker_tls_enabled: "false"
+core_vm_docker_tls_cert_file: "/path/to/server.pem"
+core_vm_docker_tls_ca_file: "/path/to/ca.pem"
+core_vm_docker_tls_key_file: "/path/to/server-key.pem"
+core_vm_docker_hostConfig_NetworkMode: "host"
+core_vm_docker_hostConfig_Dns: false
+core_vm_docker_hostConfig_LogConfig_Type: "json-file"
+core_vm_docker_hostConfig_LogConfig_Config_maxsize: "50m"
+core_vm_docker_hostConfig_LogConfig_Config_maxfile: "5"
+core_vm_docker_hostConfig_Memory: 2147483648
+
+# CONFIG CHAINCODE SECTION
+core_chaincode_id_path: ""
+core_chaincode_id_name: ""
+core_chaincode_golang_Dockerfile:
+core_chaincode_car_Dockerfile:
+core_chaincode_java_Dockerfile:
+core_chaincode_startuptimeout: 300000
+core_chaincode_deploytimeout: 30000
+core_chaincode_mode: "net"
+core_chaincode_installpath: "/opt/gopath/bin/"
+core_chaincode_keepalive: 0
+
+# CONFIG LEDGER SECTION
+core_ledger_blockchain_genesisBlock: ""
+core_ledger_state_deltaHistorySize: 500
+core_ledger_state_dataStructure_name: "buckettree"
+core_ledger_state_dataStructure_configs_numBuckets: 1000003
+core_ledger_state_dataStructure_configs_maxGroupingAtEachLevel: 5
+core_ledger_state_dataStructure_configs_bucketCacheSize: 100
+
+# CONFIG SECURITY SECTION
+core_security_enabled: "false"
+core_security_enrollID: "vp"
+core_security_enrollSecret: "f3489fy98ghf"
+core_security_privacy: "false"
+core_security_level: 256
+core_security_hashAlgorithm: "SHA3"
+core_security_tcert_btach_size: 200
+core_security_attributes_enabled: "false"
+core_security_multithreading_enabled: "false"
+core_security_confidentialityProtocolVersion: "1.2"
+
+# CONFIG STATETRANSFER SECTION
+core_statetransfer_recoverdamage: "true"
+core_statetransfer_blocksperrequest: 20
+core_statetransfer_maxdeltas: 200
+core_statetransfer_timeout_singleblock: "2s"
+core_statetransfer_timeout_singlestatedelta: "2s"
+core_statetransfer_timeout_fullstate: "60s"
