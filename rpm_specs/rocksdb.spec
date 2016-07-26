@@ -30,18 +30,19 @@ Development files for rocksdb
 PORTABLE=1 make shared_lib
 
 %install
-INSTALL_PATH=%{buildroot} make install-shared
+INSTALL_PATH=%{buildroot}/usr make install-shared
+mv %{buildroot}/usr/lib %{buildroot}/usr/lib64
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root)
-/lib/librocksdb.so*
+/usr/lib64/librocksdb.so*
 
 %files devel
-/lib/librocksdb.so
-/include/*
+/usr/lib64/librocksdb.so
+/usr/include/*
 
 
 %changelog
