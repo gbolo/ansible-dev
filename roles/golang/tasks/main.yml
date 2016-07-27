@@ -5,13 +5,11 @@
   yum: name=libselinux-python state=present disable_gpg_check=no
   when: ansible_selinux.status == "enabled"
 
-
-# Check if terraform binary already exist, store to tf_bin
+# Check if go binary already exist, store to reg_go_bin
 # http://docs.ansible.com/ansible/stat_module.html
 - name: Stat Go binary
   local_action: stat path={{go_bin}}
   register: reg_go_bin
-
 
 # Download tarball if go bin not there
 - name: Get Go release
@@ -30,12 +28,16 @@
     copy: no
   when: reg_go_bin.stat.exists == false
 
+# create generic GOPATH
+- name: create gopath directory
+  file: path={{env_gopath}} state=directory mode=0755
+
 - name: Add the Go bin directory to the PATH environment variable for all users
-  copy:
-    src: go-bin.sh
+  template:
+    src: go-bin.sh.j2
     dest: /etc/profile.d
 
 - name: Set GOPATH for all users
-  copy:
-    src: go-path.sh
+  template:
+    src: go-path.sh.j2
     dest: /etc/profile.d
