@@ -6,7 +6,7 @@ Summary:        A blockchain project
 License:        APACHE-2
 URL:            https://github.com/hyperledger/fabric
 
-BuildRequires:  gcc-c++, snappy-devel, zlib-devel, bzip2-devel
+BuildRequires:  git, go-1.6, gcc-c++, snappy-devel, zlib-devel, bzip2-devel
 Requires:       libstdc++, glibc, gcc-c++, gcc, snappy, zlib, bzip2
 ExclusiveArch:  x86_64
 
