@@ -1,0 +1,41 @@
+---
+
+# install selinux python module if needed
+- name: install selinux python module
+  yum: name=libselinux-python state=present disable_gpg_check=no
+  when: ansible_selinux.status == "enabled"
+
+
+# Check if terraform binary already exist, store to tf_bin
+# http://docs.ansible.com/ansible/stat_module.html
+- name: Stat Go binary
+  local_action: stat path={{go_bin}}
+  register: reg_go_bin
+
+
+# Download tarball if go bin not there
+- name: Get Go release
+  get_url:
+    url: "{{go_tarball_url}}"
+    dest: /tmp/go.linux-amd64.tar.gz
+    mode: 0755
+    checksum: "{{go_tarball_checksum}}"
+  when: reg_go_bin.stat.exists == false
+
+# unzip only if go bin is not present
+- name: untar Go binary
+  unarchive:
+    src: /tmp/go.linux-amd64.tar.gz
+    dest: /usr/local
+    copy: no
+  when: reg_go_bin.stat.exists == false
+
+- name: Add the Go bin directory to the PATH environment variable for all users
+  copy:
+    src: go-bin.sh
+    dest: /etc/profile.d
+
+- name: Set GOPATH for all users
+  copy:
+    src: go-path.sh
+    dest: /etc/profile.d
