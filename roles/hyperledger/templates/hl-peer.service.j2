@@ -1,0 +1,17 @@
+[Unit]
+Description=Hyperledger Peer Service
+After=network.target
+Requires=network.target
+
+[Service]
+PIDFile=/var/hyperledger/production/peer.pid
+Environment=GOPATH=/opt/gopath
+ExecStart=/opt/gopath/bin/peer node start
+ExecStop=/opt/gopath/bin/peer node stop
+
+Restart=on-failure
+RestartSec=30
+User=root
+
+[Install]
+WantedBy=multi-user.target

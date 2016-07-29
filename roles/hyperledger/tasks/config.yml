@@ -1,0 +1,14 @@
+---
+
+- name: Set GOPATH for all users
+  template:
+    src: go-path.sh.j2
+    dest: /etc/profile.d/go-path.sh
+
+- name: Hyperledger core configuration file
+  template:
+    src: core.yaml.j2
+    dest: /opt/gopath/src/github.com/hyperledger/fabric/peer/core.yaml
+    mode: 0644
+    owner: root
+    group: root

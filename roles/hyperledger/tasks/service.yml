@@ -1,0 +1,18 @@
+---
+# Add systemd unit file for hyperledger
+- name: Add Hyperledger systemd unit file
+  template:
+    src: hl-peer.service.j2
+    dest: /etc/systemd/system/hl-peer.service
+    mode: 0644
+    owner: root
+    group: root
+  notify:
+    - reload systemd
+
+# Hyperledger Peer Service
+- name: Ensure Hyperledger Peer is Running and Enabled
+  service:
+    name: hl-peer
+    state: started
+    enabled: yes

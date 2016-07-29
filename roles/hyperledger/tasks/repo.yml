@@ -1,0 +1,17 @@
+# Linuxctl Repo
+- name: Install linuxctl YUM Repo
+  yum_repository:
+    name: linuxctl
+    description: linuxctl YUM repo
+    baseurl: https://repo.linuxctl.com
+    gpgkey: https://repo.linuxctl.com/RPM-GPG-KEY-linuxctl
+    gpgcheck: yes
+
+# EPEL Repo
+- name: Install EPEL YUM Repo
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgkey: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+    gpgcheck: yes

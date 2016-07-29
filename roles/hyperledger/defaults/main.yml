@@ -1,11 +1,19 @@
 ---
+# PACKAGES
+hyperledger_rpms:
+  - golang
+  - rocksdb
+  - hyperledger
+
+env_gopath: /opt/gopath
+
 # CONFIG - CLI
 core_cli_address: "0.0.0.0:30304"
 
 # CONFIG - REST
 core_rest_enabled: "true"
 core_rest_address: "0.0.0.0:5000"
-core_rest_validPatterns_enrollmentID: "'^\w+$'"
+core_rest_validPatterns_enrollmentID: "'^\\w+$'"
 
 # CONFIG - LOGGING
 core_logging_peer: "warning"
