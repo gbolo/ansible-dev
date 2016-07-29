@@ -12,3 +12,11 @@
     mode: 0644
     owner: root
     group: root
+
+- name: Hyperledger pbft consensus configuration file
+  template:
+    src: pbft_config.yaml.j2
+    dest: /opt/gopath/src/github.com/hyperledger/fabric/consensus/pbft/config.yaml
+    mode: 0644
+    owner: root
+    group: root
