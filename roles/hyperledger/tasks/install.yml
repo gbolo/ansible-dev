@@ -2,5 +2,9 @@
 
 # Install some dependancies
 - name: Install Hyperledger Packages
-  yum: name={{item}} state=present disable_gpg_check=no
+  yum:
+    name: "{{item}}"
+    state: "{{hyperledger_pkg_state}}"
+    disable_gpg_check: no
+    update_cache: yes
   with_items: "{{hyperledger_rpms}}"

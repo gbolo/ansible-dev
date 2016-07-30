@@ -1,18 +1,22 @@
 ---
+peer_delete_data: true
+
 # PACKAGES
 hyperledger_rpms:
   - golang
   - rocksdb
   - hyperledger
 
+hyperledger_pkg_state: latest 
+
 env_gopath: /opt/gopath
 
 # CONFIG - CLI
-core_cli_address: "0.0.0.0:30304"
+core_cli_address: "{{ansible_default_ipv4.address}}:30304"
 
 # CONFIG - REST
 core_rest_enabled: "true"
-core_rest_address: "0.0.0.0:5000"
+core_rest_address: "{{ansible_default_ipv4.address}}:5000"
 core_rest_validPatterns_enrollmentID: "'^\\w+$'"
 
 # CONFIG - LOGGING
@@ -27,8 +31,8 @@ core_peer_version: "0.1.0"
 core_peer_id: "jdoe"
 core_peer_privateKey: false
 core_peer_networkId: "dev"
-core_peer_listenAddress: "0.0.0.0:30303"
-core_peer_address: "0.0.0.0:30303"
+core_peer_listenAddress: "{{ansible_default_ipv4.address}}:30303"
+core_peer_address: "{{ansible_default_ipv4.address}}:30303"
 core_peer_addressAutoDetect: "false"
 core_peer_gomaxprocs: "-1"
 core_peer_workers: 2
@@ -38,9 +42,9 @@ core_peer_sync_state_snapshot_channelSize: 50
 core_peer_sync_state_deltas_channelSize: 20
 # PEER VALIDATOR RELATED
 core_peer_validator_enabled: "true"
-core_peer_validator_consensus_plugin: "noops"
+core_peer_validator_consensus_plugin: "pbft"
 core_peer_validator_consensus_buffersize: 1000
-core_peer_validator_events_address: "0.0.0.0:31315"
+core_peer_validator_events_address: "{{ansible_default_ipv4.address}}:31315"
 core_peer_validator_events_buffersize: 100
 core_peer_validator_events_timeout: 10
 # PEER TLS
@@ -64,7 +68,7 @@ core_peer_discovery_touchMaxNodes: 100
 # PEER LEDGER DATA
 core_peer_fileSystemPath: "/var/hyperledger/production"
 core_peer_profile_enabled: "false"
-core_peer_profile_listenAddress: "0.0.0.0:6060"
+core_peer_profile_listenAddress: "{{ansible_default_ipv4.address}}:6060"
 
 # CONFIG VM SECTION
 core_vm_endpoint: "unix:///var/run/docker.sock"

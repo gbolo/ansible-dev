@@ -12,6 +12,8 @@
     mode: 0644
     owner: root
     group: root
+  notify:
+    - restart hyperledger peer
 
 - name: Hyperledger pbft consensus configuration file
   template:
@@ -20,3 +22,5 @@
     mode: 0644
     owner: root
     group: root
+  notify:
+    - restart hyperledger peer

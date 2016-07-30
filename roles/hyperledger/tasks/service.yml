@@ -16,3 +16,25 @@
     name: hl-peer
     state: started
     enabled: yes
+
+# DELETE DATA
+- block:
+
+  - name: stop peer
+    command: systemctl stop hl-peer
+    ignore_errors: yes
+
+  - name: delete ledger data
+    file: path=/var/hyperledger/production/db/ state=absent
+    notify: restart hyperledger peer
+
+  - name: copy docker clean script
+    copy: src=docker_clean.sh dest=/tmp/docker_clean.sh  mode=0755
+
+  - name: delete all chaincode containers and images
+    command: "/bin/bash /tmp/docker_clean.sh"
+    ignore_errors: yes
+
+
+
+  when: peer_delete_data
