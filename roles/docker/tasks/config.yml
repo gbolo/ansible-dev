@@ -27,6 +27,7 @@
   with_dict: "{{ dropins }}"
   notify:
     - reload systemd docker
+  when: False
 
 # Create docker config directoy
 - name: create docker config directory

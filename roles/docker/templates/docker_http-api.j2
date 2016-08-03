@@ -1,4 +1,4 @@
 # https://docs.docker.com/engine/admin/configuring/#/configuring-docker-1
 [Service]
 ExecStart=
-ExecStart=/usr/bin/docker daemon -H tcp://{{dropins['http-api.conf']['bind_ip']}}:2375 -H fd://
+ExecStart=/usr/bin/dockerd daemon -H tcp://{{dropins['http-api.conf']['bind_ip']}}:2375 -H fd://

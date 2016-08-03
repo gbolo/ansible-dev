@@ -4,6 +4,7 @@ docker_debug: "false"
 enable_docker_compose: true
 docker_api_cors_header: "*"
 docker_graph: "/var/lib/docker"
+docker_live_restore: "true"
 
 # docker swarm
 docker_swarm_enabled: false

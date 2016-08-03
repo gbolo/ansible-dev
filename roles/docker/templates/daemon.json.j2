@@ -2,9 +2,11 @@
 	"log-driver": "",
 	"debug": {{docker_debug}},
 	"api-cors-header": "{{docker_api_cors_header}}",
+	"live-restore": {{docker_live_restore}},
 	{% if docker_swarm_enabled -%}
 	"cluster-store": "{{docker_swarm_cluster_store}}",
 	"cluster-advertise": "{{docker_swarm_cluster_advertise}}",
 	{% endif -%}
+	"hosts": [ "tcp://0.0.0.0:2375" ],
 	"graph": "{{docker_graph}}"
 }
