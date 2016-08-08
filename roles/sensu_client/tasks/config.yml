@@ -1,0 +1,33 @@
+---
+
+- name: configure sensu client.json
+  template:
+    src: client.json.j2
+    dest: "{{ sensu_confd }}/client.json"
+    mode: 0555
+  notify: restart sensu_client
+
+- name: configure sensu rabbitmq.json
+  template:
+    src: rabbitmq.json.j2
+    dest: "{{ sensu_confd }}/rabbitmq.json"
+    mode: 0555
+  notify: restart sensu_client
+
+- name: create sensu checks directory
+  file:
+    path: "{{sensu_confd}}/checks"
+    state: directory
+    mode: 0755
+    owner: "{{sensu_user}}"
+    group: "{{sensu_group}}"
+
+- name: create basic sensu checks
+  sensu_check:
+    name: "{{ item.key }}"
+    command: "{{ item.value.command }}"
+    interval: "{{ item.value.interval }}"
+    path: "/etc/sensu/conf.d/checks/{{ item.key }}.json"
+    standalone: yes
+  with_dict: "{{ sensu_common_checks }}"
+  notify: restart sensu_client

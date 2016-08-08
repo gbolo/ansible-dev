@@ -1,0 +1,14 @@
+{
+  "client": {
+    "name": "{{ sensu_client_conf_name }}",
+    "address": "{{ ansible_default_ipv4['address'] }}",
+    "subscriptions": [],
+    "socket": {
+      "bind": "127.0.0.1",
+      "port": 3030
+    },
+    "safe_mode": false,
+    "keepalive": {
+    }
+  }
+}

@@ -1,0 +1,8 @@
+---
+
+- name: Install Official Sensu Repo
+  yum_repository:
+    name: docker
+    description: Docker Repository
+    baseurl: http://sensu.global.ssl.fastly.net/yum/$basearch/
+    gpgcheck: no

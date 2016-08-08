@@ -1,0 +1,18 @@
+---
+
+- name: Install Sensu Package
+  yum:
+    name: sensu
+    state: present
+    disable_gpg_check: yes
+
+- name: install basic sensu check plugins
+  gem:
+    name: "{{ item }}"
+    state: present
+    executable: /opt/sensu/embedded/bin/gem
+    # don't install sensu gem to home dir!
+    user_install: no
+  with_items:
+    - "{{ sensu_common_plugins }}"
+  notify: restart sensu_client

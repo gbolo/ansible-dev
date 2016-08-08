@@ -1,0 +1,8 @@
+---
+
+
+- name: Ensure Sensu Client is Running and Enabled
+  service:
+    name: "sensu-client"
+    state: started
+    enabled: yes

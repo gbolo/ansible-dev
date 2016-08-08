@@ -1,0 +1,45 @@
+---
+
+sensu_confd: "/etc/sensu/conf.d"
+sensu_user: "sensu"
+sensu_group: "sensu"
+
+sensu_client_conf_name: "{{ ansible_hostname }}"
+
+sensu_rabbitmq_ssl_enabled: false
+
+sensu_rabbitmq_host: "127.0.0.2"
+sensu_rabbitmq_port: 5672
+sensu_rabbitmq_vhost: "/sensu"
+sensu_rabbitmq_user: "sensu"
+sensu_rabbitmq_password: "secret"
+
+sensu_common_plugins:
+  - "sensu-plugins-cpu-checks"
+  - "sensu-plugins-load-checks"
+  - "sensu-plugins-memory-checks"
+  - "sensu-plugins-disk-checks"
+  - "sensu-plugins-process-checks"
+
+sensu_common_checks:
+  cpu:
+    command: "check-cpu.rb -w 50 -c 75"
+    interval: 60
+  load:
+    command: "check-load.rb -w 0.5,1.0,2.0 -c 0.9,3.0,5.0 -p"
+    interval: 120
+  memory:
+    command: "check-memory-percent.rb -w 80 -c 90"
+    interval: 120
+  swap:
+    command: "check-swap.rb -w 50 -c 200"
+    interval: 120
+  disk:
+    command: "check-disk-usage.rb -w 80 -c 90"
+    interval: 120
+  proc_sshd:
+    command: "check-process.rb -f /var/run/sshd.pid"
+    interval: 60
+  proc_crond:
+    command: "check-process.rb -f /var/run/crond.pid"
+    interval: 120
