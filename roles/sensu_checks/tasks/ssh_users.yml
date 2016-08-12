@@ -1,0 +1,21 @@
+---
+
+# Install any required scripts or plugins
+- name: copy ssh_users scripts
+  copy:
+    src: "check-ssh-users.sh"
+    dest: "/opt/sensu/embedded/bin/check-ssh-users.sh"
+    mode: 0755
+    owner: sensu
+    group: sensu
+
+# Add defined checks
+- name: create ssh_users sensu checks
+  sensu_check:
+    name: "{{ item.key }}"
+    command: "{{ item.value.command }}"
+    interval: "{{ item.value.interval }}"
+    path: "/etc/sensu/conf.d/checks/{{ item.key }}.json"
+    standalone: yes
+  with_dict: "{{ sensu_checks_ssh_users }}"
+  notify: restart sensu_client

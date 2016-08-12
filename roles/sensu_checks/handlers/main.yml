@@ -1,0 +1,5 @@
+---
+- name: restart sensu_client
+  service:
+    name: "sensu-client"
+    state: restarted

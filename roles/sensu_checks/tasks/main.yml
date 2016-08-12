@@ -1,0 +1,14 @@
+---
+# tasks file for sensu_checks
+
+- include: ssh_users.yml
+  when: sensu_checks_ssh_users_enabled
+
+- include: hyperledger_peer.yml
+  when: sensu_checks_hyperledger_enabled
+
+- include: hyperledger_membersrvc.yml
+  when: sensu_checks_hyperledger_membersrvc_enabled
+
+- include: ntp_external.yml
+  when: sensu_checks_ntp_external_enabled

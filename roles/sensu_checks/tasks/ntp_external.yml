@@ -1,0 +1,28 @@
+---
+
+# Install any required system packages
+- name: installing ntpdate for sensu check
+  yum:
+    name: "ntpdate"
+    state: present
+    disable_gpg_check: no
+
+# Install any required scripts or plugins
+- name: copy ntp_external scripts
+  copy:
+    src: "check-ntp-external.sh"
+    dest: "/opt/sensu/embedded/bin/check-ntp-external.sh"
+    mode: 0755
+    owner: sensu
+    group: sensu
+
+# Add defined checks
+- name: create ntp_external sensu checks
+  sensu_check:
+    name: "{{ item.key }}"
+    command: "{{ item.value.command }}"
+    interval: "{{ item.value.interval }}"
+    path: "/etc/sensu/conf.d/checks/{{ item.key }}.json"
+    standalone: yes
+  with_dict: "{{ sensu_checks_ntp_external }}"
+  notify: restart sensu_client

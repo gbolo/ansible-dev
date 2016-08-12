@@ -1,0 +1,49 @@
+---
+
+# SSH users
+sensu_checks_ssh_users_enabled: true
+sensu_checks_ssh_users:
+  ssh_users:
+    command: "check-ssh-users.sh"
+    interval: 60
+
+# Hyperledger Peer checks
+sensu_checks_hyperledger_enabled: false
+sensu_checks_hyperledger_files:
+  - "check-peer-status.sh"
+  - "check-peer-network.py"
+  - "check-peer-chaincode.py"
+sensu_checks_hyperledger:
+  proc_peer:
+    command: "check-process.rb -f /var/hyperledger/production/peer.pid"
+    interval: 120
+  proc_docker:
+    command: "check-process.rb -f /var/run/docker.pid"
+    interval: 120
+  peer_status:
+    command: "check-peer-status.sh"
+    interval: 30
+  peer_quarum:
+    command: "check-peer-network.py"
+    interval: 30
+  peer_chaincode:
+    command: "check-peer-chaincode.py"
+    interval: 60
+
+# Hyperledger Membersrvc checks
+sensu_checks_hyperledger_membersrvc_enabled: false
+sensu_checks_hyperledger_membersrvc:
+  proc_membersrvc:
+    command: "check-process.rb -p /opt/gopath/bin/membersrvc"
+    interval: 120
+  ports_membersrvc:
+    command: "check-ports.rb -h 0.0.0.0 -p 50051 -t 10"
+    interval: 120
+
+# NTP External Check
+sensu_checks_ntp_external_enabled: false
+sensu_checks_ntp_external_server: "10.0.10.13"
+sensu_checks_ntp_external:
+  ntp_external:
+    command: "check-ntp-external.sh {{ sensu_checks_ntp_external_server }}"
+    interval: 120

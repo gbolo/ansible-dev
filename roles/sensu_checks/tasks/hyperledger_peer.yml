@@ -1,0 +1,31 @@
+---
+
+# Add sensu user to docker group for monitoring purposes
+- name: add sensu user to docker group
+  user:
+    name: sensu
+    groups: "docker"
+    append: yes
+  notify: restart sensu_client
+
+# Install any required scripts or plugins
+- name: copy hyperledger-peer scripts
+  copy:
+    src: "{{ item }}"
+    dest: "/opt/sensu/embedded/bin/{{ item }}"
+    mode: 0755
+    owner: sensu
+    group: sensu
+  with_items: "{{sensu_checks_hyperledger_files}}"
+  notify: restart sensu_client
+
+# Add defined checks
+- name: create hyperledger-peer sensu checks
+  sensu_check:
+    name: "{{ item.key }}"
+    command: "{{ item.value.command }}"
+    interval: "{{ item.value.interval }}"
+    path: "/etc/sensu/conf.d/checks/{{ item.key }}.json"
+    standalone: yes
+  with_dict: "{{ sensu_checks_hyperledger }}"
+  notify: restart sensu_client

@@ -1,0 +1,22 @@
+---
+
+# Install any required scripts or plugins
+- name: install sensu plugin network checks
+  gem:
+    name: "sensu-plugins-network-checks"
+    state: present
+    executable: /opt/sensu/embedded/bin/gem
+    # don't install sensu gem to home dir!
+    user_install: no
+  notify: restart sensu_client
+
+# Add defined checks
+- name: create hyperledger-membersrvc sensu checks
+  sensu_check:
+    name: "{{ item.key }}"
+    command: "{{ item.value.command }}"
+    interval: "{{ item.value.interval }}"
+    path: "/etc/sensu/conf.d/checks/{{ item.key }}.json"
+    standalone: yes
+  with_dict: "{{ sensu_checks_hyperledger_membersrvc }}"
+  notify: restart sensu_client
