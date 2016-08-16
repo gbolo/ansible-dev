@@ -1,0 +1,12 @@
+---
+- name: restart elasticsearch
+  service:
+    name: elasticsearch
+    state: restarted
+
+- name: reload systemd
+  # systemd module not available before ansible version 2.2
+  #systemd: daemon_reload=yes name=elasticsearch
+  # work around - use command
+  command: systemctl daemon-reload
+  notify: restart elasticsearch

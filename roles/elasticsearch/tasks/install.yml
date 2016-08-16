@@ -1,0 +1,16 @@
+---
+
+# Install some dependancies
+- name: Install Java
+  yum:
+    name: "java-1.8.0-openjdk"
+    state: present
+    disable_gpg_check: no
+    update_cache: yes
+
+- name: Install elasticsearch Package
+  yum:
+    name: elasticsearch
+    state: present
+    disable_gpg_check: no
+    update_cache: yes

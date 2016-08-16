@@ -1,0 +1,92 @@
+---
+
+- name: push elasticsearch config
+  template:
+    src: "elasticsearch.yml.j2"
+    dest: /etc/elasticsearch/elasticsearch.yml
+    mode: 0444
+    owner: "{{ elasticsearch_user }}"
+    group: "{{ elasticsearch_group }}"
+  notify:
+    - restart elasticsearch
+
+- name: push elasticsearch sysconfig file
+  template:
+    src: "sysconfig_elasticsearch.j2"
+    dest: /etc/sysconfig/elasticsearch
+    mode: 0444
+    owner: root
+    group: root
+  notify:
+    - restart elasticsearch
+
+
+# Create dropin directoy
+- name: create dropin directory
+  file:
+    path: /etc/systemd/system/elasticsearch.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+# get list of files in elasticsearch.service.d register variable called active
+- name: get list of drop-ins
+  shell: ls -1 /etc/systemd/system/elasticsearch.service.d/
+  register: active_dropins
+  # disable change, since it alwyas produces a change
+  changed_when: False
+
+# remove all files in docker.d which are not managed by us
+- name: remove other drop-ins
+  file: path=/etc/systemd/system/elasticsearch.service.d/{{ item }} state=absent
+  with_items: "{{ active_dropins.stdout_lines }}"
+  when: item not in dropins
+  notify:
+    - reload systemd
+
+# add our managed dropin
+- name: configure systemd overrides
+  template:
+    src: "override-es.conf.j2"
+    dest: "/etc/systemd/system/elasticsearch.service.d/override-es.conf"
+    mode: 0444
+  notify:
+    - reload systemd
+
+# install plugins
+- name: install elasticsearch plugins
+  elasticsearch_plugin:
+    name: "{{ item.value.name }}"
+    version: "{{ item.value.version }}"
+    state: present
+  with_dict: "{{ es_plugins }}"
+  notify:
+    - restart elasticsearch
+  when: es_plugins
+
+# Performance tunning
+- sysctl:
+    name: vm.swappiness
+    value: 1
+    state: present
+
+- sysctl:
+    name: vm.max_map_count
+    value: 262144
+    state: present
+
+- pam_limits:
+    domain: "{{ elasticsearch_user }}"
+    limit_type: "{{ item }}"
+    limit_item: nofile
+    value: "{{ elasticsearch_max_open_files }}"
+  with_items:
+    - "hard"
+    - "soft"
+
+- pam_limits:
+    domain: "{{ elasticsearch_user }}"
+    limit_type: "-"
+    limit_item: memlock
+    value: unlimited

@@ -1,0 +1,9 @@
+---
+  
+- name: Install elasticsearch YUM Repo
+  yum_repository:
+    name: "elasticsearch-2.x"
+    description: Elasticsearch repository for 2.x packages
+    baseurl: https://packages.elastic.co/elasticsearch/2.x/centos
+    gpgkey: https://packages.elastic.co/GPG-KEY-elasticsearch
+    gpgcheck: yes

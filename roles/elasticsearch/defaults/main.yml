@@ -1,0 +1,49 @@
+---
+
+elasticsearch_heapsize: "1g"
+elasticsearch_max_open_files: 65535
+
+elasticsearch_user: elasticsearch
+elasticsearch_group: elasticsearch
+
+dropins:
+  - "override-es.conf"
+
+es_plugins:
+  elasticsearch_head:
+    name: "mobz/elasticsearch-head"
+    version: master
+#    proxy_host: proxy.example.com
+#    proxy_port: 8080
+
+# configuration ---------------------------------------------------------------
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html
+
+# cluster
+es_config_cluster_name: ~
+# node
+es_config_node_name: "{{ ansible_hostname }}"
+es_config_node_rack: ~
+es_config_node_master: "false"
+es_config_node_data: "true"
+# index
+es_config_index_number_of_shards: "2"
+es_config_index_number_of_replicas: "0"
+es_config_index_shard_check_on_startup: ~
+es_config_index_auto_expand_replicas: ~
+es_config_index_refresh_interval: ~
+# paths
+es_config_path_data: ~
+es_config_path_logs: ~
+# memory
+es_config_boostrap_mlockall: "true"
+# network
+es_config_network_bind_host: "{{ ansible_default_ipv4.address }}"
+es_config_network_publish_host: "{{ ansible_default_ipv4.address }}"
+es_config_discovery_zen_ping_unicast_hosts: ~
+es_config_discovery_zen_minimum_master_nodes: ~
+# gateway
+es_config_gateway_recover_after_nodes: ~
+# various
+es_config_node_max_local_storage_nodes: ~
+es_config_action_destructive_requires_name: ~

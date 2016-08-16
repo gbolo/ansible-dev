@@ -1,0 +1,7 @@
+---
+
+- name: Ensure Elasticsearch is Running and Enabled
+  service:
+    name: elasticsearch
+    state: started
+    enabled: yes

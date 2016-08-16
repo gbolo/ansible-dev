@@ -1,0 +1,77 @@
+# {{ ansible_managed }}
+
+# Cluster
+{% if es_config_cluster_name -%}
+cluster.name: {{ es_config_cluster_name }}
+{% endif -%}
+
+# Node
+{% if es_config_node_name -%}
+node.name: {{ es_config_node_name }}
+{% endif -%}
+{% if es_config_node_rack -%}
+node.rack: {{ es_config_node_rack }}
+{% endif -%}
+{% if es_config_node_master -%}
+node.master: {{ es_config_node_master }}
+{% endif -%}
+{% if es_config_node_data -%}
+node.data: {{ es_config_node_data }}
+{% endif -%}
+
+# Index
+{% if es_config_index_number_of_shards -%}
+index.number_of_shards: {{ es_config_index_number_of_shards }}
+{% endif -%}
+{% if es_config_index_shard_check_on_startup -%}
+index.shard.check_on_startup: {{ es_config_index_shard_check_on_startup }}
+{% endif -%}
+{% if es_config_index_number_of_replicas -%}
+index.number_of_replicas: {{ es_config_index_number_of_replicas }}
+{% endif -%}
+{% if es_config_index_auto_expand_replicas -%}
+index.auto_expand_replicas: {{ es_config_index_auto_expand_replicas }}
+{% endif -%}
+{% if es_config_index_refresh_interval -%}
+index.refresh_interval: {{ es_config_index_refresh_interval }}
+{% endif -%}
+
+# Paths
+{% if es_config_path_data -%}
+path.data: {{ es_config_path_data }}
+{% endif -%}
+{% if es_config_path_logs -%}
+path.logs: {{ es_config_path_logs }}
+{% endif -%}
+
+# Memory
+{% if es_config_boostrap_mlockall -%}
+boostrap.mlockal: {{ es_config_boostrap_mlockall }}
+{% endif -%}
+
+# Network
+{% if es_config_network_bind_host -%}
+network.bind_host: {{ es_config_network_bind_host }}
+{% endif -%}
+{% if es_config_network_publish_host -%}
+network.publish_host: {{ es_config_network_publish_host }}
+{% endif -%}
+{% if es_config_discovery_zen_ping_unicast_hosts -%}
+discovery.zen.ping.unicast.hosts: {{ es_config_discovery_zen_ping_unicast_hosts | to_json }}
+{% endif -%}
+{% if es_config_discovery_zen_minimum_master_nodes -%}
+discovery.zen.minimum_master_nodes: {{ es_config_discovery_zen_minimum_master_nodes }}
+{% endif -%}
+
+# Gateway
+{% if es_config_gateway_recover_after_nodes -%}
+gateway.recover_after_nodes: {{ es_config_gateway_recover_after_nodes }}
+{% endif -%}
+
+# Various
+{% if es_config_node_max_local_storage_nodes -%}
+node.max_local_storage_nodes: {{ es_config_node_max_local_storage_nodes }}
+{% endif -%}
+{% if es_config_action_destructive_requires_name -%}
+action.destructive_requires_name: {{ es_config_action_destructive_requires_name }}
+{% endif -%}
