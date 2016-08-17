@@ -13,8 +13,6 @@ es_plugins:
   elasticsearch_head:
     name: "mobz/elasticsearch-head"
     version: master
-#    proxy_host: proxy.example.com
-#    proxy_port: 8080
 
 # configuration ---------------------------------------------------------------
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html
