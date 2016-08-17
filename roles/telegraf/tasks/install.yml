@@ -1,0 +1,8 @@
+---
+
+- name: Install telegraf Packages
+  yum:
+    name: telegraf
+    state: present
+    disable_gpg_check: no
+    update_cache: yes

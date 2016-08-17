@@ -1,0 +1,11 @@
+---
+
+- name: push telegraf config
+  template:
+    src: "telegraf.conf.j2"
+    dest: /etc/telegraf/telegraf.conf
+    mode: 0444
+    owner: "{{ telegraf_user }}"
+    group: "{{ telegraf_group }}"
+  notify:
+    - restart telegraf

@@ -1,0 +1,6 @@
+---
+telegraf_user: telegraf
+telegraf_group: telegraf
+telegraf_conf_agent_interval: "30s"
+telegraf_conf_output_influxdb_urls:
+  - "http://localhost:8086"

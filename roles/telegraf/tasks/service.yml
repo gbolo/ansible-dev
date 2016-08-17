@@ -1,0 +1,8 @@
+---
+
+# telegraf Service
+- name: Ensure telegraf is Running and Enabled
+  service:
+    name: telegraf
+    state: started
+    enabled: yes
