@@ -1,3 +1,6 @@
 [submodule "roles/nfs"]
 	path = roles/nfs
 	url = https://github.com/gbolo/ansible-nfs
+[submodule "roles/ipfs"]
+	path = roles/ipfs
+	url = https://github.com/gbolo/ansible-ipfs.git
