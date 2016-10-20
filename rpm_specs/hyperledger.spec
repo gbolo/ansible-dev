@@ -6,7 +6,7 @@ Summary:        A blockchain project
 License:        APACHE-2
 URL:            https://www.hyperledger.org
 
-BuildRequires:  gcc-c++, snappy-devel, zlib-devel, bzip2-devel
+BuildRequires:  gcc-c++, snappy-devel, zlib-devel, bzip2-devel, rocksdb-devel
 Requires:       snappy, zlib, bzip2, rocksdb
 ExclusiveArch:  x86_64
 
@@ -50,12 +50,11 @@ git clone --single-branch -b ${BRANCH} --depth 1 http://gerrit.hyperledger.org/r
 
 # BUILD
 cd $GOPATH/src/github.com/hyperledger/fabric/peer
-#sed -i 's/err = client.StartContainer(containerID, getDockerHostConfig())/err = client.StartContainer(containerID)/g' $GOPATH/src/github.com/hyperledger/fabric/core/container/dockercontroller/dockercontroller.go
-CGO_CFLAGS=" " CGO_LDFLAGS="-lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" go install
-go clean
+CGO_CFLAGS=" " CGO_LDFLAGS="-lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" ${GOROOT}/bin/go install
+${GOROOT}/bin/go clean
 cd $GOPATH/src/github.com/hyperledger/fabric/membersrvc
-CGO_CFLAGS=" " CGO_LDFLAGS="-lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" go install
-go clean
+CGO_CFLAGS=" " CGO_LDFLAGS="-lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" ${GOROOT}/bin/go install
+${GOROOT}/bin/go clean
 
 %install
 mkdir -p %{buildroot}/opt/gopath
