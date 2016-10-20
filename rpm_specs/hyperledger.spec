@@ -35,16 +35,18 @@ Summary: hyperledger fabric membersrvc only
 %description membersrvc
 hyperledger fabric membersrvc only
 
-#%prep
-#%setup -q
-
 %build
 
 # PREPARE
+BRANCH="v0.6"
+GOURL="https://storage.googleapis.com/golang/go1.6.3.linux-amd64.tar.gz"
+curl -s -o go.tar.gz ${GOURL}
+tar -xzf go.tar.gz
+export GOROOT=%{_builddir}/go
 export GOPATH=%{_builddir}
 mkdir -p $GOPATH/src/github.com/hyperledger
 cd $GOPATH/src/github.com/hyperledger
-git clone --single-branch -b v0.6 --depth 1 http://gerrit.hyperledger.org/r/fabric
+git clone --single-branch -b ${BRANCH} --depth 1 http://gerrit.hyperledger.org/r/fabric
 
 # BUILD
 cd $GOPATH/src/github.com/hyperledger/fabric/peer
